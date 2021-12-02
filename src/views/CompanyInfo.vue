@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#111317; padding:30px; height:100vh">
+  <div style="background-color:#111317; padding:30px; height:100%">
     <div class="card text-white" style="background-color:#181A1E; text-align:left; border-radius:10px">
 
       <!-- Header -->
@@ -133,41 +133,8 @@
                 </div>
               </div>
 
-              <div class="col">
-                <h5 style="margin-bottom:20px">Packages list</h5>
-
-                <!-- Nombre del paquete -->
-                <div style="margin-bottom:10px">
-                  <input v-model="packageTitle" type="text" class="form-control-sm" placeholder="Package 1">
-                </div>
-
-                <!-- Descripción del paquete -->
-                <div style="margin-bottom:10px">
-                  <input v-model="packageDescription" type="text" class="form-control-sm" placeholder="Dinner, music, services and decoration.">
-                </div>
-
-                <!-- Precio del paquete -->
-                <div style="margin-bottom:10px">
-                  <input v-model="packagePrice" type="text" class="form-control-sm" placeholder="$500,000 MXN">
-                </div>
-
-                <hr>
-
-                <div class="row">
-                  <div class="d-inline-flex p-2 justify-content-end">
-                    <!-- Botón de agregar paquete -->
-                    <button class="btn btn-primary" style="margin-right:20px; background-color:#3F5AE8">
-                      <i class="fas fa-plus" />
-                    </button>
-
-                    <!-- Botón de eliminar paquete -->
-                    <button class="btn btn-danger" style="background-color:#E83F3F">
-                      <i class="fas fa-minus" />
-                    </button>
-                  </div>
-                </div>
-
-              </div>
+              <!-- Componente de agregar paquete -->
+              <addPackage />
 
             </div>
 
@@ -187,9 +154,14 @@
 </template>
 
 <script>
+
+import addPackage from '../components/addPackage.vue'
 import auth from '../logic/auth' 
 
 export default {
+  components:{
+    addPackage
+  },
   data() {
     return {
       // Variable de edición

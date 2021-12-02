@@ -1,5 +1,6 @@
 <template>
   <div style="background-color:#111317; padding:30px; height:100vh">
+    <div style="background-color:#111317; height:100%">
     <div class="card d-flex text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
 
       <!-- Header -->
@@ -97,7 +98,7 @@
                 <!-- Botones de editar y cancelar -->
                 <div class="row" style="margin-bottom:10px; margin-right:10px">
                   <div class="col d-flex justify-content-end">
-                    <a @click="edit = 0" class="btn btn-primary" style="background-color:#3F5AE8">
+                    <a @click="updSchedule()" class="btn btn-primary" style="background-color:#3F5AE8">
                       <i class="fas fa-save" style="margin-right:5px" />
                       Guardar cambios
                     </a>
@@ -116,17 +117,37 @@
 
     </div>
   </div>
+  </div>
 </template>
 
 <script>
+import auth from '../logic/auth' 
+
 export default {
   data() {
     return {
       edit: 0,
+
+      // Modelos de inputs a actualizar
+      date: "",
+      time: "",
+
     }
   },
   methods: {
+    updSchedule() {
+      this.edit = 0
 
+      var json = {
+        date: "",
+        time: ""
+      }
+
+      console.log('%c⧭', 'color: #00bf00', "Cambios guardados")
+
+      auth.API_POST('/companies/updateInfo', json, {'Content-Type': 'application/json'})
+      
+    }
   }
 }
 </script>
