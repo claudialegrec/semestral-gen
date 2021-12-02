@@ -85,12 +85,12 @@
                       <!-- Fecha -->
                       <div style="margin-bottom:10px">
                         <p style="margin-bottom:5px">Fecha:</p>
-                        <input type="text" class="form-control-sm" placeholder="27 de Noviembre del 2021">
+                        <input v-model="date" type="text" class="form-control-sm" placeholder="27 de Noviembre del 2021">
                       </div>
 
                       <!-- Hora -->
                       <p style="margin-bottom:5px">Hora:</p>
-                      <input type="text" class="form-control-sm" placeholder="8:00 PM">
+                      <input v-model="time" type="text" class="form-control-sm" placeholder="8:00 PM">
                     </div>
                   </div>
                 </div>
@@ -139,8 +139,8 @@ export default {
       this.edit = 0
 
       var json = {
-        date: "",
-        time: ""
+        date: this.date,
+        time: this.time
       }
 
       console.log('%c⧭', 'color: #00bf00', "Cambios guardados")
