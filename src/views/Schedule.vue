@@ -1,6 +1,6 @@
 <template>
   <div style="background-color:#111317; padding:30px; height:100vh">
-    <div class="card text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
+    <div class="card d-flex text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
 
       <!-- Header -->
       <div class="row" style="padding:30px;">
@@ -38,11 +38,11 @@
 
                     <div class="col">
                       <!-- Fecha -->
-                      <p style="margin-bottom:0px">Fecha:</p>
+                      <p style="margin-bottom:0px">Date:</p>
                       <p style="color:#B5B5B5">27 de Noviembre del 2021</p>
 
                       <!-- Hora -->
-                      <p style="margin-bottom:0px">Hora:</p>
+                      <p style="margin-bottom:0px">Hour:</p>
                       <p style="color:#B5B5B5">8:00 PM</p>
                     </div>
                   </div>

@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'LogIn',
   data() {
@@ -39,7 +41,17 @@ export default {
   },
   methods: {
     login() {
-      this.$router.replace({ path: 'Home'})
+      
+      var json = {
+        email: this.user,
+        password: this.password
+      }
+
+      axios.post('http://f0a6-187-189-17-19.ngrok.io/users/Login', json, {headers: {'Content-Type': 'application/json'}})
+      .then((response) => {
+        console.log('%c⧭', 'color: #00a3cc', response)
+        this.$router.replace({ path: 'Home'})
+      })
     }
   }
 }

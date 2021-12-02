@@ -47,17 +47,17 @@
       <div v-if="usertype == 2">
         <div class="row" style="margin-top:-10px">
           <label class="labelLogin">Company Name</label>
-          <input type="companyName" v-model="name" class="form-control" placeholder="Company Name" />
+          <input type="text" v-model="name" class="form-control" placeholder="Company Name" />
         </div>
 
         <div class="row" style="margin-top:10px">
           <label class="labelLogin">Location</label>
-          <input type="location" v-model="lastname" class="form-control" placeholder="Location" />
+          <input type="text" v-model="lastname" class="form-control" placeholder="Location" />
         </div>
 
         <div class="row" style="margin-top:10px">
           <label class="labelLogin">E-mail</label>
-          <input type="e-mail" v-model="email" class="form-control" placeholder="E-mail" />
+          <input type="text" v-model="email" class="form-control" placeholder="E-mail" />
         </div>
 
         <div class="row" style="margin-top:10px">
@@ -81,6 +81,8 @@
 
 <script>
 
+import axios from 'axios'
+
 export default {
   name: 'SignUp',
   data() {
@@ -103,13 +105,24 @@ export default {
   },
   methods: {
     signup() {
-      this.$router.replace({ path: 'Home'})
+      // this.$router.replace({ path: 'Home'})
+
+      var json = {
+        name: this.name,
+        lastName: this.lastname,
+        email: this.email,
+        password: this.password
+      }
+
+      axios.post('http://f0a6-187-189-17-19.ngrok.io/users/SingUp', json, {headers: {'Content-Type': 'application/json'}})
+      .then((response) => {
+        console.log('%c⧭', 'color: #00a3cc', response)
+      })
+
     }
   },
   watch: {
-    usertype (val){
-      console.log('%c⧭', 'color: #00e600', val)
-    }
+
   }
 }
 </script>
