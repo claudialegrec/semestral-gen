@@ -16,19 +16,19 @@
                 <!-- Nombre -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Name:</p>
-                  <input type="text" class="form-control-sm" placeholder="Alfredo">
+                  <input v-model="name" type="text" class="form-control-sm" placeholder="Alfredo">
                 </div>
 
                 <!-- Apellidos -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Last Name:</p>
-                  <input type="text" class="form-control-sm" placeholder="García Yapor">
+                  <input v-model="lastName" type="text" class="form-control-sm" placeholder="García Yapor">
                 </div>
 
                 <!-- Teléfono -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Phone:</p>
-                  <input type="text" class="form-control-sm" placeholder="614 154 9058">
+                  <input v-model="phone" type="text" class="form-control-sm" placeholder="614 154 9058">
                 </div>
               </div>
 
@@ -36,32 +36,32 @@
                 <!-- Salón de eventos -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Event center:</p>
-                  <input type="text" class="form-control-sm" placeholder="Celebráre">
+                  <input v-model="companyName" type="text" class="form-control-sm" placeholder="Celebráre">
                 </div>
 
                 <!-- Paquete -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Package:</p>
-                  <input type="text" class="form-control-sm">
+                  <input v-model="packageName" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Fecha -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Date:</p>
-                  <input type="text" class="form-control-sm">
+                  <input v-model="date" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Hora -->
                 <div style="margin-bottom:10px">
-                  <p style="margin-bottom:5px">Hour:</p>
-                  <input type="text" class="form-control-sm">
+                  <p style="margin-bottom:5px">Time:</p>
+                  <input v-model="time" type="text" class="form-control-sm">
                 </div>
               </div>
             </div>
 
             <!-- Botón de Agendar Cita -->
             <div class="d-flex justify-content-end" style="margin-top:30px">
-              <a class="btn btn-primary" style="background-color:#3F5AE8">
+              <a @click="createSchedule()" class="btn btn-primary" style="background-color:#3F5AE8">
                 <i class="fas fa-check" style="margin-right:5px" />
                 Create Schedule
               </a>
@@ -75,15 +75,37 @@
 </template>
 
 <script>
+import auth from '../logic/auth'
+
 export default {
   name: 'NewSchedule',
   data() {
     return {
+      // Modelos de inputs
+      name: "",
+      lastname: "",
+      phone: "",
+      companyName: "",
+      packageName: "",
+      date: "",
+      time: "",
 
     }
   },
   methods: {
-    addSchedule() {
+    createSchedule() {
+      
+      var json = {
+        name: this.name,
+        lastName: this.lastName,
+        phone: this.phone,
+        companyName: this.companyName,
+        packageName: this.packageName,
+        date: this.date,
+        time: this.time
+      }
+
+      auth.API_POST('/companies/updateInfo', json, {'Content-Type': 'application/json'})
 
     }
   }

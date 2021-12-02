@@ -43,7 +43,7 @@
                       <p style="color:#B5B5B5">27 de Noviembre del 2021</p>
 
                       <!-- Hora -->
-                      <p style="margin-bottom:0px">Hour:</p>
+                      <p style="margin-bottom:0px">Time:</p>
                       <p style="color:#B5B5B5">8:00 PM</p>
                     </div>
                   </div>
@@ -136,6 +136,7 @@ export default {
   },
   methods: {
     updSchedule() {
+
       this.edit = 0
 
       var json = {
