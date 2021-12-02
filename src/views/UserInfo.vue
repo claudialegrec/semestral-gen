@@ -84,7 +84,7 @@
 
                 <!-- Botón de Guardar Cambios -->
                 <div class="d-flex justify-content-end" style="margin-top:30px">
-                  <a @click="edit = 0" class="btn btn-primary" style="background-color:#3F5AE8">
+                  <a @click="updInfoUser()" class="btn btn-primary" style="background-color:#3F5AE8">
                     <i class="fas fa-save" style="margin-right:5px" />
                     Save
                   </a>
@@ -107,7 +107,11 @@ export default {
     }
   },
   methods: {
+    updInfoUser() {
+      
+      this.edit = 0;
 
+    }
   }
 }
 </script>
