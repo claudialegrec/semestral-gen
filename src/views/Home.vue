@@ -10,9 +10,9 @@
       
       <div class="row" style="padding:30px; margin-top:-30px">
         <div v-for="(company, key) in companiesList" :key="key" class="col-sm-4 mb-3">
-          {{company}}
+          <!-- {{company}} -->
           <!-- Card de negocios -->
-          <CardService :title="company.name" :rating="company.rating" :text="company.description"/>
+          <CardService :title="company.name" :rating="company.rating" :text="company.description" :id="company._id"/>
 
         </div>
       </div>

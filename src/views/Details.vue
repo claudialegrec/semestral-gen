@@ -53,16 +53,28 @@
 </template>
 
 <script>
+import auth from '../logic/auth'
+import {mapState} from 'vuex'
 export default {
   name: 'Details',
   data() {
     return {
-
+      companyInfo:{}
     }
+  },
+  computed:{
+    // ...mapGetters(['Company/getCompanyInfo'])
+    ...mapState(['companyId'])
   },
   methods: {
     createSchedule() {
       this.$router.replace({ path: 'NewSchedule' })
+    },
+    loadInfo(){
+      let json = {companyId: this.companyId}
+      auth.API_POST('companies/CompanyInfo', json, {'Content-Type': 'application/json'}).then((response) => {
+        this.companyInfo = response.data.data;
+      })
     }
   }
 }
