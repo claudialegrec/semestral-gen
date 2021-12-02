@@ -45,8 +45,6 @@ const actions = {
   async createCompany({commit}, signUpInfo){
     auth.API_POST('/companies/SignUp', signUpInfo, {'Content-Type': 'application/json'})
     .then((response) => {
-
-      console.log('%c⧭', 'color: #aa00ff', response);
       commit('setCompanyUser', response.data.data);
     })
   },
