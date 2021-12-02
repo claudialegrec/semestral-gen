@@ -4,12 +4,18 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // Modules import
-// import Services from '@/store/modules/Services.store';
+import Appointment from '@/store/modules/Appointment.store';
+import Company from '@/store/modules/Company.store';
+import Pack from '@/store/modules/Pack.store';
+import Users from '@/store/modules/Users.store';
 
 export default new Vuex.Store({
-    state: {},
-    mutations: {},
-    modules: {
-        // Services: Services
-    }
+  state: {},
+  mutations: {},
+  modules: {
+    Appointment: Appointment,
+    Company: Company,
+    Pack: Pack,
+    Users: Users
+  }
 })

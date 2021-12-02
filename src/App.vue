@@ -1,8 +1,11 @@
 <template>
-  <Sidebar />
-  <div :style="{ 'margin-left': sidebarWidth }">
-    <router-view />
-  </div>
+  <!-- <router-view /> -->
+  <!-- <div v-if="logged == 1"> -->
+    <Sidebar/>
+    <div :style="{ 'margin-left': sidebarWidth }">
+      <router-view />
+    </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -12,6 +15,11 @@ export default {
   components: { Sidebar },
   setup() {
     return { sidebarWidth }
+  },
+  data() {
+    return {
+      logged: 0
+    }
   }
 }
 </script>

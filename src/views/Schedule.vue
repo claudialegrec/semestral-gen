@@ -31,7 +31,7 @@
                       <p style="margin-bottom:0px">Paquete:</p>
                       <p style="color:#B5B5B5">Paquete 1</p>
 
-                    <!-- Precio -->
+                      <!-- Precio -->
                       <p style="margin-bottom:0px">Price:</p>
                       <p style="color:#B5B5B5">$500,000 MXN</p>
                     </div>

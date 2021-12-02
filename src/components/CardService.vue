@@ -2,7 +2,7 @@
   <div>
     <!-- Cards de negocios -->
     <div class="card" style="width:18rem; background-color:#292A33; border-radius:10px">
-      <img class="card-img-top" src="../assets/Celebrare.jpg" alt="Card image cap">
+      <img class="card-img-top" src="../assets/Celebrare.jpg" alt="Card image cap" style="border-radius:10px">
       <div class="card-body">
         <div class="row justify-content-between">
           <div class="col">
@@ -16,7 +16,7 @@
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <div class="row">
           <div class="col d-flex justify-content-end">
-            <a href="#" class="btn btn-primary" style="background-color:#3F5AE8">Details</a>
+            <a href="#" class="btn btn-primary" style="background-color:#3F5AE8" @click="showDetails()">Details</a>
           </div>
         </div>
       </div>
@@ -27,5 +27,15 @@
 <script>
 export default {
   name: 'CardService',
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+    showDetails() {
+      this.$router.replace({ path: 'Details' })
+    }
+  }
 }
 </script>

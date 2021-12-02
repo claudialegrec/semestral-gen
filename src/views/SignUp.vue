@@ -133,7 +133,9 @@ export default {
   .titleh3, .labelLogin {
     font-weight: 500;
     font-family: 'Fira Sans', sans-serif;
-
+    text-align: start;
+    margin-left: -10px;
+    margin-bottom:5px ;
   }
   
   .bodyLogin {

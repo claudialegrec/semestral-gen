@@ -9,17 +9,17 @@ const routes = [
     component: LogIn
   },
   {
-    path: '/home',
+    path: '/Home',
     name: 'Home',
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/schedule',
+    path: '/Schedule',
     name: 'Schedule',
     component: () => import('../views/Schedule.vue')
   },
   {
-    path: '/userinfo',
+    path: '/UserInfo',
     name: 'UserInfo',
     component: () => import('../views/UserInfo.vue')
   },
@@ -27,6 +27,21 @@ const routes = [
     path: '/SignUp',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/Details',
+    name: 'Details',
+    component: () => import('../views/Details.vue')
+  },
+  {
+    path: '/NewSchedule',
+    name: 'NewSchedule',
+    component: () => import('../views/NewSchedule.vue')
+  },
+  {
+    path: '/CompanyInfo',
+    name: 'CompanyInfo',
+    component: () => import('../views/CompanyInfo.vue')
   },
 ]
 

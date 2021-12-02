@@ -52,6 +52,7 @@ export default {
         console.log('%c⧭', 'color: #00a3cc', response)
         this.$router.replace({ path: 'Home'})
       })
+      
     }
   }
 }

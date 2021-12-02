@@ -20,14 +20,15 @@
     </h5>
 
     <div class="flex-column mb-auto">
-      <SidebarLink to="/home" icon="fas fa-home">Home</SidebarLink>
-      <SidebarLink to="/schedule" icon="fas fa-calendar-alt">Schedule</SidebarLink>
-      <SidebarLink to="/userinfo" icon="fas fa-user">User Info</SidebarLink>
+      <SidebarLink to="/Home" icon="fas fa-home">Home</SidebarLink>
+      <SidebarLink to="/Schedule" icon="fas fa-calendar-alt">Schedule</SidebarLink>
+      <SidebarLink to="/UserInfo" icon="fas fa-user">User Info</SidebarLink>
+      <SidebarLink to="/CompanyInfo" icon="fas fa-building">Company Info</SidebarLink>
     </div>
 
-    <div class="flex-column mb-auto" style="margin-top:310px">
+    <div class="flex-column mb-auto" style="margin-top:250px">
       <hr>
-      <SidebarLink to="/" icon="fas fa-sign-out-alt">Log Out</SidebarLink>
+      <SidebarLink to="/" icon="fas fa-sign-out-alt" style="background-color:#BD4DF2">Log Out</SidebarLink>
     </div>
 
     <span
