@@ -27,6 +27,11 @@
 <script>
 export default {
   name: 'CardService',
+  props:{
+    title:String,
+    rating:String,
+    text:String
+  },
   data() {
     return {
 

@@ -12,16 +12,27 @@ const state = {
     state: "",
     address: "",
     password: ""
-  }
+  },
+  companiesList:[]
 };
 
 const getters = {
   getCompanyInfo: state => {
     return state.company
+  },
+  getCompaniesList: state => {
+    return state.companiesList
   }
 };
 
 const actions = {
+  async fetchCompaniesList({commit}){
+    auth.API_GET('/companies/companiesInfoList', {'Content-Type': 'application/json'})
+    .then((response) => {
+      console.log('%c⧭', 'color: #0066ff', response);
+      commit('setCompaniesList', response.data.data);
+    })
+  },
   async fetchCompanyUser({commit}, loginInfo){
     auth.API_POST('/companies/Login', loginInfo, {'Content-Type': 'application/json'})
     .then((response) => {
@@ -30,8 +41,8 @@ const actions = {
     })
   },
 
-  async createCompany({commit}, company){
-    auth.API_POST('/companies/SignUp', company, {'Content-Type': 'application/json'})
+  async createCompany({commit}, signUpInfo){
+    auth.API_POST('/companies/SignUp', signUpInfo, {'Content-Type': 'application/json'})
     .then((response) => {
 
       console.log('%c⧭', 'color: #aa00ff', response);
@@ -39,10 +50,18 @@ const actions = {
     })
   },
 
+  async updateCompany({commit}, newCompany){
+    auth.API_POST('/users/updateInfo', newCompany, {'Content-Type': 'application/json'})
+    .then((response) => {
+      commit('updUser', response.data.data);
+    })
+  }
+
 };
 
 const mutations = {
   setCompanyUser:(state, company) => state.company = company,
+  setCompaniesList:(state, companies) => state.companiesList = companies,
   updCompanyUser: (state, updatedCompany) => {
     if(state.company.id === updatedCompany.id){
       state.company = updatedCompany;

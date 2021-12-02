@@ -136,11 +136,15 @@ export default {
       } else {
         var jsonCompany = {
           name: this.companyName,
+          description: "",
           email: this.emailCompany,
           password: this.passwordCompany,
           city: this.city,
+          phone: "",
           state: this.state,
           address: this.location,
+          capacity: "",
+          category: ""
         }
 
         this['Company/createCompany'](jsonCompany)
