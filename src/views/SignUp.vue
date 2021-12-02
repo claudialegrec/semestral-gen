@@ -81,10 +81,13 @@
 
 <script>
 
-import axios from 'axios'
+import {mapActions, mapGetters} from "vuex"
 
 export default {
   name: 'SignUp',
+  computed:{
+    ...mapGetters(['Users/getUserInfo', 'Company/getCompanyInfo'])
+  },
   data() {
     return {
       // Modelos de usuario
@@ -108,6 +111,7 @@ export default {
   mounted () {
   },
   methods: {
+    ...mapActions(['Users/createUser', 'Company/createCompany']),
     signup() {
       if (this.usertype == 1) {
         var json = {
@@ -117,11 +121,18 @@ export default {
           password: this.password
         }
 
-        axios.post('http://7b44-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io/users/SingUp', json, {headers: {'Content-Type': 'application/json'}})
+        this['Users/createUser'](json)
         .then((response) => {
-          console.log('%c⧭', 'color: #00a3cc', response)
+
+          console.log('%c⧭', 'color: #e50000', response)
           this.$router.replace({ path: 'Home'})
         })
+
+        // axios.post('http://7b44-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io/users/SingUp', json, {headers: {'Content-Type': 'application/json'}})
+        // .then((response) => {
+        //   console.log('%c⧭', 'color: #00a3cc', response)
+        //   this.$router.replace({ path: 'Home'})
+        // })
       } else {
         var jsonCompany = {
           name: this.companyName,
@@ -132,11 +143,16 @@ export default {
           address: this.location,
         }
 
-        axios.post('http://7b44-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io/users/SingUp', jsonCompany, {headers: {'Content-Type': 'application/json'}})
-        .then((response) => {
-          console.log('%c⧭', 'color: #00a3cc', response)
+        this['Company/createCompany'](jsonCompany)
+        .then(() => {
           this.$router.replace({ path: 'Home'})
         })
+
+        // axios.post('http://7b44-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io/users/SingUp', jsonCompany, {headers: {'Content-Type': 'application/json'}})
+        // .then((response) => {
+        //   console.log('%c⧭', 'color: #00a3cc', response)
+        //   this.$router.replace({ path: 'Home'})
+        // })
       }
     }
   },

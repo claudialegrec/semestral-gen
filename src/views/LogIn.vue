@@ -5,31 +5,47 @@
         <h3 style="margin-left:-15px">Welcome back</h3>
         <p class="text-secondary" style="margin-left:-15px; margin-top:-10px">Welcome back! Please enter your details</p>
       </div>
-        <div class="row" style="margin-top:-10px">
-          <label class="labelLogin">Username</label>
-          <input type="email" v-model="user" class="form-control" placeholder="Username or Email" />
+      <div class="row" style="margin-bottom:25px">
+        <div class="col form-check" style="margin-left:50px">
+          <input v-model="usertype" value="1" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+          <label class="form-check-label" for="flexRadioDefault1">
+            User
+          </label>
         </div>
 
-        <div class="row" style="margin-top:10px">
-          <label class="labelLogin">Password</label>
-          <input type="password" v-model="password" class="form-control" placeholder="•••••••" />
+        <div class="col form-check">
+          <input v-model="usertype" value="2" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Company
+          </label>
         </div>
+      </div>
+      <div class="row" style="margin-top:-10px">
+        <label class="labelLogin">Username</label>
+        <input type="email" v-model="user" class="form-control" placeholder="Username or Email" />
+      </div>
 
-        <br>
-        <div class="row">
-          <button class="btn btn-primary btn-block" style="background-color:#1A2526" @click="login()">Log In</button>
-        </div>
+      <div class="row" style="margin-top:10px">
+        <label class="labelLogin">Password</label>
+        <input type="password" v-model="password" class="form-control" placeholder="•••••••" />
+      </div>
 
-        <div class="d-flex justify-content-center" style="margin-top:15px; margin-bottom:-15px">
-          <p class="text-secondary" style="margin-left:-10px">Don't have an account?</p>
-          <a href="SignUp" class="text-primary" style="margin-left:5px">Sign up</a>
-        </div>
+      <br>
+      <div class="row">
+        <button class="btn btn-primary btn-block" style="background-color:#1A2526" @click="login()">Log In</button>
+      </div>
+
+      <div class="d-flex justify-content-center" style="margin-top:15px; margin-bottom:-15px">
+        <p class="text-secondary" style="margin-left:-10px">Don't have an account?</p>
+        <a href="SignUp" class="text-primary" style="margin-left:5px">Sign up</a>
+      </div>
     </div>
   </body>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import {mapActions, mapGetters} from "vuex"
 
 export default {
   name: 'LogIn',
@@ -37,9 +53,18 @@ export default {
     return {
       user: "",
       password: "",
+      usertype: ""
     }
   },
+  computed:{
+    ...mapGetters(['Users/getUserInfo', 'Company/getCompanyInfo'])
+  },
+  mounted() {
+    
+  },
   methods: {
+
+    ...mapActions(['Users/fetchUser', 'Company/fetchCompanyUser']),
     login() {
       
       var json = {
@@ -47,11 +72,27 @@ export default {
         password: this.password
       }
 
-      axios.post('http://7b44-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io/users/Login', json, {headers: {'Content-Type': 'application/json'}})
-      .then((response) => {
-        console.log('%c⧭', 'color: #00a3cc', response)
-        this.$router.replace({ path: 'Home'})
-      })
+      if(this.usertype == 1){
+        this['Users/fetchUser'](json)
+        .then(() => {
+          this.$router.replace({ path: 'Home'})
+        })
+      }else{
+        this['Company/fetchCompanyUser'](json)
+        .then(() => {
+
+          this.$router.replace({ path: 'Home'})
+        })
+      }
+
+      
+
+
+
+      // axios.post('http://7b44-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io/users/Login', json, {headers: {'Content-Type': 'application/json'}})
+      // .then((response) => {
+      //   console.log('%c⧭', 'color: #00a3cc', response)
+      // })
       
     }
   }

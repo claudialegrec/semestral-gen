@@ -3,15 +3,16 @@ import auth from '../../logic/auth'
 
 const state = {
   user: {
-    id: "",
-    name: "",
-    lastname: "",
-    phone: "",
-    email: "",
-    password: "",
-    city: "",
-    state: "",
-    address: ""
+    mensaje: "hola"
+    // id: "",
+    // name: "",
+    // lastname: "",
+    // phone: "",
+    // email: "",
+    // password: "",
+    // city: "",
+    // state: "",
+    // address: ""
   }
 };
 
@@ -23,7 +24,7 @@ const getters = {
 
 const actions = {
   async fetchUser({commit}, loginInfo){
-    auth.API_POST('/users/Login', loginInfo, {'Content-Type': 'application/json'})
+    await auth.API_POST('/users/Login', loginInfo, {'Content-Type': 'application/json'})
     .then((response) => {
       console.log(response);
       commit('setUser', response.data.data);
@@ -71,16 +72,8 @@ const mutations = {
 
 export default {
   namespaced: true,
-  state : {
-    ...state
-  },
-  getters: {
-    ...getters
-  },
-  actions: {
-    ...actions
-  },
-  mutations: {
-    ...mutations
-  }
+  state,
+  getters,
+  actions,
+  mutations
 }

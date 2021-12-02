@@ -24,13 +24,23 @@
 <script>
 
 import CardService from '@/components/CardService'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     CardService,
   },
+  computed:{
+    ...mapGetters(['Users/getUserInfo', 'Company/getCompanyInfo'])
+  },
   data() { 
 
+  },
+  mounted() {
+    
+    console.log('%c⧭', 'color: #00e600', this['Users/getUserInfo'])
+    
+    console.log('%c⧭', 'color: #00a3cc', this['Company/getCompanyInfo'])
   },
 }
 </script>
