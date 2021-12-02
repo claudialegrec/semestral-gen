@@ -41,7 +41,7 @@ const actions = {
   async updateUser({commit}, newUser){
     auth.API_POST('/users/updateInfo', newUser, {'Content-Type': 'application/json'})
     .then((response) => {
-      commit('updUser', response.data);
+      commit('updUser', response.data.data);
     })
   }
 };
