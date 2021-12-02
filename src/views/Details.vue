@@ -35,7 +35,7 @@
                 <h5 style="margin-bottom:20px">Packages</h5>
 
                 <!-- Paquetes -->
-                <p style="margin-bottom:0px">Pack 1:</p>
+                <p style="margin-bottom:0px">Package 1:</p>
                 <p style="color:#B5B5B5">Dinner, music, services and decoration.</p>
 
                 <div class="d-flex justify-content-end">

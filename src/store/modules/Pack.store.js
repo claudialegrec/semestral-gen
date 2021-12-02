@@ -1,26 +1,36 @@
 // import axios from 'axios'
 
 const state = {
-  packs: [
-    {
-      title: "",
-      description: ""
-    },
-  ]
+  packages: []
 };
 
 const getters = {
-  // getListas: (state) => state.listas
+  getPackageInfo: state => {
+    return state.packages
+  }
 };
 
 const actions = {
-  // addServiceList({ commit }, json) {
-  //   commit('addService', json)
-  // }
+
 };
 
 const mutations = {
-  // addService:(state, service) => state.servicio = service
+  setPackages:(state, packages) => state.packages = packages,
+  updPackage: (state, updatedPackage) => {
+    if(state.package.id === updatedPackage.id){
+      state.package = updatedPackage;
+    }
+  },
+  deletePackages: (state, packages) => {
+    if(state.packages.id === packages.id){
+      state.packages = {
+        id: "",
+        title: "",
+        description: "",
+        price: ""
+      }
+    }
+  }
 };
 
 export default {

@@ -47,22 +47,22 @@
       <div v-if="usertype == 2">
         <div class="row" style="margin-top:-10px">
           <label class="labelLogin">Company Name</label>
-          <input type="text" v-model="name" class="form-control" placeholder="Company Name" />
+          <input type="text" v-model="companyName" class="form-control" placeholder="Company Name" />
         </div>
 
         <div class="row" style="margin-top:10px">
           <label class="labelLogin">Location</label>
-          <input type="text" v-model="lastname" class="form-control" placeholder="Location" />
+          <input type="text" v-model="location" class="form-control" placeholder="Location" />
         </div>
 
         <div class="row" style="margin-top:10px">
           <label class="labelLogin">E-mail</label>
-          <input type="text" v-model="email" class="form-control" placeholder="E-mail" />
+          <input type="text" v-model="emailCompany" class="form-control" placeholder="E-mail" />
         </div>
 
         <div class="row" style="margin-top:10px">
           <label class="labelLogin">Password</label>
-          <input type="password" v-model="password" class="form-control" placeholder="•••••••" />
+          <input type="password" v-model="passwordCompany" class="form-control" placeholder="•••••••" />
         </div>
       </div>
 
@@ -96,6 +96,10 @@ export default {
       // Modelos de compañía
       companyName: "",
       location: "",
+      emailCompany: "",
+      passwordCompany: "",
+      city: "",
+      state: "",
 
       // Tipos de usuario
       usertype: "",
@@ -105,20 +109,35 @@ export default {
   },
   methods: {
     signup() {
-      // this.$router.replace({ path: 'Home'})
+      if (this.usertype == 1) {
+        var json = {
+          name: this.name,
+          lastName: this.lastname,
+          email: this.email,
+          password: this.password
+        }
 
-      var json = {
-        name: this.name,
-        lastName: this.lastname,
-        email: this.email,
-        password: this.password
+        axios.post('http://7b44-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io/users/SingUp', json, {headers: {'Content-Type': 'application/json'}})
+        .then((response) => {
+          console.log('%c⧭', 'color: #00a3cc', response)
+          this.$router.replace({ path: 'Home'})
+        })
+      } else {
+        var jsonCompany = {
+          name: this.companyName,
+          email: this.emailCompany,
+          password: this.passwordCompany,
+          city: this.city,
+          state: this.state,
+          address: this.location,
+        }
+
+        axios.post('http://7b44-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io/users/SingUp', jsonCompany, {headers: {'Content-Type': 'application/json'}})
+        .then((response) => {
+          console.log('%c⧭', 'color: #00a3cc', response)
+          this.$router.replace({ path: 'Home'})
+        })
       }
-
-      axios.post('http://f0a6-187-189-17-19.ngrok.io/users/SingUp', json, {headers: {'Content-Type': 'application/json'}})
-      .then((response) => {
-        console.log('%c⧭', 'color: #00a3cc', response)
-      })
-
     }
   },
   watch: {

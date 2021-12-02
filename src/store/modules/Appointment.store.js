@@ -1,11 +1,11 @@
-// import Vuex from 'vuex';
 // import axios from 'axios';
 
 const state = {
   appointmentsUser: [
     {
+      id: "",
       companyName: "",
-      pack: "",
+      package: "",
       price: "",
       date: "",
       hour: ""
@@ -13,8 +13,9 @@ const state = {
   ],
   appointmentsCompany: [
     {
+      id: "",
       clientName: "",
-      pack: "",
+      package: "",
       price: "",
       date: "",
       hour: ""

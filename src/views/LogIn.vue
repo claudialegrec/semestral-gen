@@ -47,7 +47,7 @@ export default {
         password: this.password
       }
 
-      axios.post('http://f0a6-187-189-17-19.ngrok.io/users/Login', json, {headers: {'Content-Type': 'application/json'}})
+      axios.post('http://7b44-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io/users/Login', json, {headers: {'Content-Type': 'application/json'}})
       .then((response) => {
         console.log('%c⧭', 'color: #00a3cc', response)
         this.$router.replace({ path: 'Home'})

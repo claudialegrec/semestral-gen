@@ -41,7 +41,7 @@
 
                 <!-- Paquete -->
                 <div style="margin-bottom:10px">
-                  <p style="margin-bottom:5px">Pack:</p>
+                  <p style="margin-bottom:5px">Package:</p>
                   <input type="text" class="form-control-sm">
                 </div>
 
