@@ -1,6 +1,6 @@
 <template>
   <div style="background-color:#111317; padding:30px; height:100vh">
-    <div class="card text-white" style="background-color:#181A1E; text-align:left">
+    <div class="card text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
 
       <!-- Header -->
       <div class="row" style="padding:30px;">
@@ -67,31 +67,31 @@
               <div v-if="edit == 1">
                 <div style="padding:10px">
                   <!-- Datos de cita -->
-                <div class="row">
-                  <!-- Paquete -->
-                  <div class="col">
-                    <div style="margin-bottom:10px">
-                      <p style="margin-bottom:5px">Paquete:</p>
-                      <input type="text" class="form-control-sm" placeholder="Paquete 1" disabled>
+                  <div class="row">
+                    <!-- Paquete -->
+                    <div class="col">
+                      <div style="margin-bottom:10px">
+                        <p style="margin-bottom:5px">Paquete:</p>
+                        <input type="text" class="form-control-sm" placeholder="Paquete 1" disabled>
+                      </div>
+
+                    <!-- Precio -->
+                      <p style="margin-bottom:5px">Price:</p>
+                      <input type="text" class="form-control-sm" placeholder="$500,000 MXN" disabled>
                     </div>
 
-                  <!-- Precio -->
-                    <p style="margin-bottom:5px">Price:</p>
-                    <input type="text" class="form-control-sm" placeholder="$500,000 MXN" disabled>
-                  </div>
+                    <div class="col" style="margin-bottom:10px">
+                      <!-- Fecha -->
+                      <div style="margin-bottom:10px">
+                        <p style="margin-bottom:5px">Fecha:</p>
+                        <input type="text" class="form-control-sm" placeholder="27 de Noviembre del 2021">
+                      </div>
 
-                  <div class="col" style="margin-bottom:10px">
-                    <!-- Fecha -->
-                    <div style="margin-bottom:10px">
-                      <p style="margin-bottom:5px">Fecha:</p>
-                      <input type="text" class="form-control-sm" placeholder="27 de Noviembre del 2021">
+                      <!-- Hora -->
+                      <p style="margin-bottom:5px">Hora:</p>
+                      <input type="text" class="form-control-sm" placeholder="8:00 PM">
                     </div>
-
-                    <!-- Hora -->
-                    <p style="margin-bottom:5px">Hora:</p>
-                    <input type="text" class="form-control-sm" placeholder="8:00 PM">
                   </div>
-                </div>
                 </div>
 
                 <!-- Botones de editar y cancelar -->

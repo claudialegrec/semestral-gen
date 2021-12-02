@@ -1,6 +1,6 @@
 <template>
   <div style="background-color:#111317; padding:30px; height:100vh">
-    <div class="card text-white" style="background-color:#181A1E; text-align:left">
+    <div class="card text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
 
       <!-- Header -->
       <div class="row" style="padding:30px;">
