@@ -16,7 +16,7 @@
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <div class="row">
           <div class="col d-flex justify-content-end">
-            <a href="#" class="btn btn-primary" style="background-color:#3F5AE8" @click="showDetails()">Details</a>
+            <a href="#" class="btn btn-primary" style="background-color:#3F5AE8" @click="showDetails(id)">Details</a>
           </div>
         </div>
       </div>
@@ -25,9 +25,11 @@
 </template>
 
 <script>
+import {mapMutations} from "vuex"
 export default {
   name: 'CardService',
   props:{
+    id:String,
     title:String,
     rating:String,
     text:String
@@ -38,7 +40,9 @@ export default {
     }
   },
   methods: {
-    showDetails() {
+    ...mapMutations(['setCompanyDetails']),
+    showDetails(companyId) {
+      this.setCompanyDetails(companyId);
       this.$router.replace({ path: 'Details' })
     }
   }

@@ -84,7 +84,8 @@ export default {
   },
   methods: {
     addSchedule() {
-
+      
+      console.log('%c%s', 'color: #731d1d', "nueva cita")
     }
   }
 }

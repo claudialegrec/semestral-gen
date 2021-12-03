@@ -9,9 +9,15 @@ import Pack from '@/store/modules/Pack.store';
 import Users from '@/store/modules/Users.store';
 
 const store = createStore({
-  state () {
-    return {
-      count: 0
+  state: {
+    
+      count: 0,
+      companyId:""
+    
+  },
+  mutations: {
+    setCompanyDetails (state, id) {
+      state.companyId = id
     }
   },
   // mutations: {
