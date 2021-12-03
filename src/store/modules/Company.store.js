@@ -27,14 +27,14 @@ const getters = {
 
 const actions = {
   async fetchCompaniesList({commit}){
-    auth.API_GET('/companies/companiesInfoList', {'Content-Type': 'application/json'})
+    auth.API_GET('companies/companiesInfoList', {'Content-Type': 'application/json'})
     .then((response) => {
       console.log('%c⧭', 'color: #0066ff', response);
       commit('setCompaniesList', response.data.data);
     })
   },
   async fetchCompanyUser({commit}, loginInfo){
-    auth.API_POST('/companies/Login', loginInfo, {'Content-Type': 'application/json'})
+    auth.API_POST('companies/Login', loginInfo, {'Content-Type': 'application/json'})
     .then((response) => {
       console.log(response);
       commit('setCompanyUser', response.data.data);
@@ -42,14 +42,14 @@ const actions = {
   },
 
   async createCompany({commit}, signUpInfo){
-    auth.API_POST('/companies/SignUp', signUpInfo, {'Content-Type': 'application/json'})
+    auth.API_POST('companies/SignUp', signUpInfo, {'Content-Type': 'application/json'})
     .then((response) => {
       commit('setCompanyUser', response.data.data);
     })
   },
 
   async updateCompany({commit}, newCompany){
-    auth.API_POST('/users/updateInfo', newCompany, {'Content-Type': 'application/json'})
+    auth.API_POST('companies/updateInfo', newCompany, {'Content-Type': 'application/json'})
     .then((response) => {
       commit('updUser', response.data.data);
     })

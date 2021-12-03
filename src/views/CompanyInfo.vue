@@ -61,6 +61,10 @@
                 <!-- Teléfono -->
                 <p style="margin-bottom:0px">Phone:</p>
                 <p style="color:#B5B5B5">614 425 5250</p>
+
+                <!-- Correo -->
+                <p style="margin-bottom:0px">Email:</p>
+                <p style="color:#B5B5B5">celebbrare@correo.com</p>
               </div>
 
               <div class="col" style="margin-left:120px">
@@ -131,6 +135,12 @@
                   <p style="margin-bottom:5px">Phone:</p>
                   <input v-model="phone" type="text" class="form-control-sm" placeholder="614 425 5250">
                 </div>
+
+                <!-- Teléfono -->
+                <div style="margin-bottom:10px">
+                  <p style="margin-bottom:5px">Email:</p>
+                  <input v-model="email" type="text" class="form-control-sm" placeholder="celebrare@correo.com">
+                </div>
               </div>
 
               <!-- Componente de agregar paquete -->
@@ -154,6 +164,7 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex"
 
 import addPackage from '../components/addPackage.vue'
 import auth from '../logic/auth' 
@@ -176,6 +187,7 @@ export default {
       state: "",
       address: "",
       phone: "",
+      email: "",
       packageTitle: "",
       packageDescription: "",
       packagePrice: "",
@@ -185,29 +197,33 @@ export default {
   methods: {
     updCompanyInfo() {
       var json = {
+        companyId: "",
         name: this.companyName,
         description: this.description,
-        capacity: this.capacity,
+        email: "",
+        password: "",
+        phone: this.phone,
         city: this.city,
         state: this.state,
         address: this.address,
-        phone: this.phone,
-        packageTitle: this.packageTitle,
-        packageDescription: this.packageDescription,
-        packagePrice: this.packagePrice
+        capacity: this.capacity,
+        // packageTitle: this.packageTitle,
+        // packageDescription: this.packageDescription,
+        // packagePrice: this.packagePrice,
       }
 
       auth.API_POST('/companies/updateInfo', json, {'Content-Type': 'application/json'})
-      //   .then((response) => {
-
-      // })
+      .then((response) => {
+        console.log('%c⧭', 'color: #ff0000', response)
+        this.edit = 0;
+      })
     },
-    addPackage() {
-
-    },
-    deletePackage() {
-
-    }
+  },
+  computed: {
+    ...mapGetters(['Company/getCompanyInfo'])
+  },
+  mounted() {
+    console.log('%c⧭', 'color: #00e600', this['Company/getCompanyInfo'])
   }
 }
 </script>
