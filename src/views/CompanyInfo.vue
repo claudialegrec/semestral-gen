@@ -32,15 +32,15 @@
               <div class="col-4">
                 <!-- Nombre -->
                 <p style="margin-bottom:0px">Company Name:</p>
-                <p style="color:#B5B5B5">Celebráre</p>
+                <p style="color:#B5B5B5">{{ response.name }}</p>
 
                 <!-- Descripción -->
                 <p style="margin-bottom:0px">Description:</p>
-                <p style="color:#B5B5B5">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p style="color:#B5B5B5">{{ response.description }}</p>
 
                 <!-- Aforo -->
                 <p style="margin-bottom:0px">Capacity:</p>
-                <p style="color:#B5B5B5">100 - 150</p>
+                <p style="color:#B5B5B5">{{ response.capacity }}</p>
 
                 <!-- Imagen -->
                 <p style="margin-bottom:0px">Image:</p>
@@ -56,15 +56,15 @@
 
                 <!-- Direccion -->
                 <p style="margin-bottom:0px">Address:</p>
-                <p style="color:#B5B5B5">Av Francisco Villa 5510, Saucito, 31110 Chihuahua, Chih.</p>
+                <p style="color:#B5B5B5">{{ response.address }}</p>
 
                 <!-- Teléfono -->
                 <p style="margin-bottom:0px">Phone:</p>
-                <p style="color:#B5B5B5">614 425 5250</p>
+                <p style="color:#B5B5B5">{{ response.phone }}</p>
 
                 <!-- Correo -->
                 <p style="margin-bottom:0px">Email:</p>
-                <p style="color:#B5B5B5">celebbrare@correo.com</p>
+                <p style="color:#B5B5B5">{{ response.email }}</p>
               </div>
 
               <div class="col" style="margin-left:120px">
@@ -91,55 +91,55 @@
                 <!-- Nombre de la compañía -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Company Name:</p>
-                  <input v-model="companyName" type="text" class="form-control-sm" placeholder="Celebráre">
+                  <input v-model="companyName" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Descripción -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Description:</p>
-                  <input v-model="desciption" type="text" class="form-control-sm" placeholder="Some quick example text to build on the card title and make up the bulk of the card's content.">
+                  <input v-model="desciption" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Aforo -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Capacity:</p>
-                  <input v-model="capacity" type="text" class="form-control-sm" placeholder="100-150">
+                  <input v-model="capacity" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Imágen -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Image:</p>
-                  <input v-model="image" type="text" class="form-control-sm" placeholder="celebrare.png">
+                  <input v-model="image" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Ciudad -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">City:</p>
-                  <input v-model="city" type="text" class="form-control-sm" placeholder="Chihuahua">
+                  <input v-model="city" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Estado -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">State:</p>
-                  <input v-model="state" type="text" class="form-control-sm" placeholder="Chihuahua">
+                  <input v-model="state" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Dirección -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Address:</p>
-                  <input v-model="address" type="text" class="form-control-sm" placeholder="Av Francisco Villa 5510, Saucito, 31110">
+                  <input v-model="address" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Teléfono -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Phone:</p>
-                  <input v-model="phone" type="text" class="form-control-sm" placeholder="614 425 5250">
+                  <input v-model="phone" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Teléfono -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Email:</p>
-                  <input v-model="email" type="text" class="form-control-sm" placeholder="celebrare@correo.com">
+                  <input v-model="email" type="text" class="form-control-sm">
                 </div>
               </div>
 
@@ -192,6 +192,8 @@ export default {
       packageDescription: "",
       packagePrice: "",
 
+      response: ""
+
     }
   },
   methods: {
@@ -224,6 +226,9 @@ export default {
   },
   mounted() {
     console.log('%c⧭', 'color: #00e600', this['Company/getCompanyInfo'])
+
+    this.response = this['Company/getCompanyInfo']
+    console.log('%c⧭', 'color: #aa00ff', this.response)
   }
 }
 </script>
