@@ -35,7 +35,7 @@
 </template>
 
 <script>
-// import auth from '../logic/auth' 
+import auth from '../logic/auth' 
 
 export default{
   name: 'addPackage',
@@ -49,10 +49,32 @@ export default{
   },
   methods: {
     addNewPackage() {
-    console.log('%c⧭', 'color: #e50000', "Añadir paquete")
+            
+      var json = {
+        packageTitle: this.packageTitle,
+        packageDescription: this.packageDescription,
+        packagePrice: this.packagePrice
+      }
+
+      auth.API_POST('/packs/newPackage', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        console.log('%c⧭', 'color: #0066ff', response);
+      })
+
     },
     deletePackage() {
-      console.log('%c⧭', 'color: #733d00', "Eliminar paquete")
+                  
+      var json = {
+        packageTitle: this.packageTitle,
+        packageDescription: this.packageDescription,
+        packagePrice: this.packagePrice
+      }
+
+      auth.API_POST('/packs/deletePack', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        console.log('%c⧭', 'color: #0066ff', response);
+      })
+
     }
   }
 }

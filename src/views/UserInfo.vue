@@ -118,8 +118,6 @@ export default {
   methods: {
     updInfoUser() {
       
-      this.edit = 0;
-
       var json = {
         name: this.name,
         lastName: this.lastName,
@@ -127,7 +125,11 @@ export default {
         email: this.email
       }
 
-      auth.API_POST('/companies/updateInfo', json, {'Content-Type': 'application/json'})
+      auth.API_POST('/users/updateInfo', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        this.edit = 0
+        console.log('%c⧭', 'color: #0066ff', response);
+      })
       
     }
   }

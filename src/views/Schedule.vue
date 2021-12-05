@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#111317; padding:30px; height:100vh">
+  <div style="background-color:#111317; padding:30px; height:120vh">
     <div style="background-color:#111317; height:100%">
     <div class="card d-flex text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
 
@@ -137,8 +137,6 @@ export default {
   methods: {
     updSchedule() {
 
-      this.edit = 0
-
       var json = {
         date: this.date,
         time: this.time
@@ -147,6 +145,10 @@ export default {
       console.log('%c⧭', 'color: #00bf00', "Cambios guardados")
 
       auth.API_POST('/companies/updateInfo', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        this.edit = 0
+        console.log('%c⧭', 'color: #0066ff', response);
+      })
       
     }
   }

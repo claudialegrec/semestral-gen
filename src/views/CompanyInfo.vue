@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#111317; padding:30px; height:100%">
+  <div style="background-color:#111317; padding:30px; height:130vh">
     <div class="card text-white" style="background-color:#181A1E; text-align:left; border-radius:10px">
 
       <!-- Header -->
@@ -150,7 +150,7 @@
 
             <!-- Botón de Guardar Cambios -->
             <div class="d-flex justify-content-end" style="margin-top:30px">
-              <a @click="edit = 0" class="btn btn-primary" style="background-color:#3F5AE8">
+              <a @click="updCompanyInfo()" class="btn btn-primary" style="background-color:#3F5AE8">
                 <i class="fas fa-save" style="margin-right:5px" />
                 Save
               </a>
