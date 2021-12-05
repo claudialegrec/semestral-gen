@@ -13,7 +13,8 @@ const state = {
     address: "",
     password: ""
   },
-  companiesList:[]
+  companiesList:[],
+  // companyId:""
 };
 
 const getters = {

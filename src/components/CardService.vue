@@ -6,14 +6,14 @@
       <div class="card-body">
         <div class="row justify-content-between">
           <div class="col">
-            <h5 class="card-title">Celebráre</h5>
+            <h5 class="card-title">{{title}}</h5>
           </div>
           <div class="d-flex col justify-content-end">
             <i class="fas fa-star" style="margin-right:5px; margin-top:3px; color:#FFB13C" />
-            <p>4.3</p>
+            <p>{{rating}}</p>
           </div>
         </div>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text">{{text}}</p>
         <div class="row">
           <div class="col d-flex justify-content-end">
             <a href="#" class="btn btn-primary" style="background-color:#3F5AE8" @click="showDetails()">Details</a>
@@ -25,12 +25,14 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   name: 'CardService',
   props:{
     title:String,
     rating:String,
-    text:String
+    text:String,
+    id:String
   },
   data() {
     return {
@@ -38,7 +40,9 @@ export default {
     }
   },
   methods: {
-    showDetails() {
+    ...mapMutations(['setCompanyDetails']),
+    showDetails(companyId) {
+      this.setCompanyDetails(companyId)
       this.$router.replace({ path: 'Details' })
     }
   }

@@ -3,17 +3,17 @@
     <div style="background-color:#111317; height:180vh">
       <div class="card text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
 
-        <!-- Header -->
-        <div class="row" style="padding:30px;">
-          <h1>Welcome, User</h1>
-          <h5 class="text-secondary" style="margin-left:20px; margin-top:-9px">Get to know the event center in your area</h5>
-        </div>
-        
-        <div class="row" style="padding:30px; margin-top:-30px">
-          <div v-for="(company, key) in companiesList" :key="key" class="col-sm-4 mb-3">
-            {{company}}
-            <!-- Card de negocios -->
-            <CardService :title="company.name" :rating="company.rating" :text="company.description"/>
+      <!-- Header -->
+      <div class="row" style="padding:30px;">
+        <h1>Welcome, User</h1>
+        <h5 class="text-secondary" style="margin-left:20px; margin-top:-9px">Get to know the event center in your area</h5>
+      </div>
+      
+      <div class="row" style="padding:30px; margin-top:-30px">
+        <div v-for="(company, key) in companiesList" :key="key" class="col-sm-4 mb-3">
+          <!-- {{company}} -->
+          <!-- Card de negocios -->
+          <CardService :title="company.name" :rating="company.rating" :text="company.description" :id="company._id"/>
 
           </div>
         </div>

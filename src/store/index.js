@@ -11,14 +11,15 @@ import Users from '@/store/modules/Users.store';
 const store = createStore({
   state () {
     return {
-      count: 0
+      count: 0,
+      companyId:""
     }
   },
-  // mutations: {
-  //   increment (state) {
-  //     state.count++
-  //   }
-  // },
+  mutations: {
+    setCompanyDetails (state, id) {
+      state.companyId = id
+    }
+  },
   modules:{
     Appointment,
     Company,
