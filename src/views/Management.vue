@@ -27,13 +27,13 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Erick</td>
-                  <td>Silva</td>
-                  <td>nintendo@email.com</td>
-                  <td>614 154 9058</td>
+                <tr v-for="(item, key) in usersList" :key="key">
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.lastName }}</td>
+                  <td>{{ item.email }}</td>
+                  <td>{{ item.phone }}</td>
                   <td>
-                    <a @click="deleteUser()" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
+                    <a @click="deleteUser(item._id)" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
                       <i class="fas fa-trash-alt" style="margin-right:5px" />
                       Delete User
                     </a>
@@ -57,14 +57,14 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Luigi's Mansion</td>
-                  <td>614 123 4567</td>
-                  <td>luigis@correo.com</td>
-                  <td>Chihuahua</td>
-                  <td>Luigis Street</td>
+                <tr v-for="(item, key) in companiesList" :key="key">
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.phone }}</td>
+                  <td>{{ item.email }}</td>
+                  <td>{{ item.city }}</td>
+                  <td>{{ item.address }}</td>
                   <td>
-                    <a @click="deleteCompany()" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
+                    <a @click="deleteCompany(item._id)" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
                       <i class="fas fa-trash-alt" style="margin-right:5px" />
                       Delete User
                     </a>
@@ -83,6 +83,8 @@
 <script>
 import Sidebar from '@/components/sidebar/Sidebar'
 import { sidebarWidth } from '@/components/sidebar/state'
+import auth from '../logic/auth'
+import {mapGetters, mapActions} from "vuex"
 
 export default {
   components: {
@@ -93,27 +95,66 @@ export default {
   },
   data() {
     return {
-      deleteUser() {
-        console.log('%c⧭', 'color: #ff0000', "Se eliminó un usuario")
+      companiesList: [],
+      usersList: [],
+    }
+  },
+  methods: {
+    deleteUser(id) {
 
-      // var json = {
-        
-      // }
+      var json = {
+        userId: id,
+        adminId: this['Users/getUserInfo']._id
+      }
+      console.log('%c⧭', 'color: #00bf00', json)
 
-      // auth.API_POST('users/deleteUser', json, {'Content-Type': 'application/json'})
+      auth.API_POST('/users/deleteUser', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+          console.log('%c⧭', 'color: #0088cc', response)
+          this.loadInfoUsers()
+      })
 
       },
-      deleteCompany() {
-        console.log('%c⧭', 'color: #ff0000', "Se eliminó una compañía")
+      deleteCompany(id) {
 
-      //   var json = {
-        
-      // }
+        var json = {
+          companyId: id,
+          adminId:this['Users/getUserInfo']._id
+        }
 
-      // auth.API_POST('companies/deleteCompany', json, {'Content-Type': 'application/json'})
+        auth.API_POST('/companies/deleteCompany', json, {'Content-Type': 'application/json'})
+        .then((response) => {
+          console.log('%c⧭', 'color: #733d00', response)
+          this.loadInfoCompanies()
+      })
 
-      }
-    }
+      },
+      loadInfoUsers() {
+
+        auth.API_GET('/users/usersList', {'Content-Type': 'application/json'})
+        .then((response) => {
+          console.log('%c⧭', 'color: #00a3cc', response)
+          this.usersList = response.data.data
+        })
+
+      },
+      loadInfoCompanies() {
+
+        auth.API_GET('/companies/companiesInfoList', {'Content-Type': 'application/json'})
+        .then((response) => {
+          console.log('%c⧭', 'color: #00e600', response)
+          this.companiesList = response.data.data
+        })
+
+      },
+      ...mapActions(['Users/LoadUserInfo'])
+  },
+  mounted() {
+    this.loadInfoUsers()
+    this.loadInfoCompanies()
+  },
+  computed: {
+    ...mapGetters(['Users/getUserInfo'])
   }
 }
 </script>
