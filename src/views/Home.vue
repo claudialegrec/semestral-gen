@@ -30,6 +30,7 @@ import CardService from '@/components/CardService'
 import { mapGetters, mapActions } from 'vuex'
 import Sidebar from '@/components/sidebar/Sidebar'
 import { sidebarWidth } from '@/components/sidebar/state'
+import auth from '../logic/auth'
 
 export default {
   components: {
@@ -64,9 +65,14 @@ export default {
   methods: {
     ...mapActions(['Company/fetchCompaniesList']),
     loadCompaniesList(){
-      this['Company/fetchCompaniesList']()
-      console.log('%c⧭', 'color: #00bf00', this['Company/getCompaniesList'])
-      // console.log('%c⧭', 'color: #bfffc8', this['Company/fetchCompaniesList'])
+      // this['Company/fetchCompaniesList']()
+      // console.log('%c⧭', 'color: #00bf00', this['Company/getCompaniesList'])
+      // // console.log('%c⧭', 'color: #bfffc8', this['Company/fetchCompaniesList'])
+      auth.API_GET('/companies/companiesInfoList', {'Content-Type': 'application/json'})
+      .then((response) => {
+        console.log(response.data.data)
+        this.companiesList = response.data.data;
+      })
     }
   },
 }

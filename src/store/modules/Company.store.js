@@ -28,11 +28,13 @@ const getters = {
 
 const actions = {
   async fetchCompaniesList({commit}){
-    auth.API_GET('companies/companiesInfoList', {'Content-Type': 'application/json'})
+    var res = await auth.API_GET('/companies/companiesInfoList', {'Content-Type': 'application/json'})
     .then((response) => {
       console.log('%c⧭', 'color: #0066ff', response);
-      commit('setCompaniesList', response.data.data);
+      commit('setCompaniesList', response);
     })
+
+    return res
   },
   async fetchCompanyUser({commit}, loginInfo){
     auth.API_POST('companies/Login', loginInfo, {'Content-Type': 'application/json'})
