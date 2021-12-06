@@ -48,7 +48,7 @@
 
                 <!-- Direccion -->
                 <p style="margin-bottom:0px">Address:</p>
-                <p style="color:#B5B5B5">{{userInfo.adress}}</p>
+                <p style="color:#B5B5B5">{{userInfo.address}}</p>
 
                 <!-- Localizacion -->
                 <p style="margin-bottom:0px">Localización:</p>
@@ -90,7 +90,7 @@
                   <input v-model="email" type="text" class="form-control-sm" placeholder="E-mail">
                 </div>
 
-                <!-- State -->
+                <!-- Address -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Address:</p>
                   <input v-model="address" type="text" class="form-control-sm" placeholder="Address">
@@ -127,7 +127,7 @@
 
 <script>
 import auth from '../logic/auth' 
-import {mapGetters, mapMutations} from "vuex"
+import {mapGetters, mapActions} from "vuex"
 
 export default {
   data() {
@@ -164,11 +164,11 @@ export default {
   },
   mounted() {
     // this['Users/getUserInfo']
-    console.log('%c⧭', 'color: #007300', this['Users/getUserInfo'])
+    // console.log('%c⧭', 'color: #007300', this['Users/getUserInfo'])
     this.loadUserInfo();
   },
   methods: {
-    ...mapMutations(['Users/LoadUserInfo']),
+    ...mapActions(['Users/LoadUserInfo']),
     loadUserInfo(){
       this.userInfo.name = this['Users/getUserInfo'].name;
       this.userInfo.lastName = this['Users/getUserInfo'].lastName;
@@ -205,11 +205,15 @@ export default {
       }
 
       auth.API_POST('/users/updateInfo', json, {'Content-Type': 'application/json'})
-      .then((response) => {
+      .then(() => {
         this.edit = 0
-        console.log('%c⧭', 'color: #0066ff', response);
-        this['Users/LoadUserInfo'](this.userId);
-        this.loadUserInfo();
+        // console.log('%c⧭', 'color: #ff0000', response);
+        
+
+        console.log('%c⧭', 'color: #e57373', this.userId)
+        this['Users/LoadUserInfo']({userId: this.userId}).then(() => {
+          this.loadUserInfo();
+        })
       })
       
     }

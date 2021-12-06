@@ -25,9 +25,10 @@ const getters = {
 const actions = {
 
   async LoadUserInfo({commit}, userId){
-    await auth.API_POST('/users/Login', userId, {'Content-Type': 'application/json'})
+    await auth.API_POST('/users/userInfo', userId, {'Content-Type': 'application/json'})
     .then((response) => {
-      console.log(response);
+      // console.log('%c⧭', 'color: #731d6d', response, 'loadUserInfo');
+      
       commit('setUser', response.data.data);
     })
   },
