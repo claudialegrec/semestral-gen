@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = "http://673e-2806-2f0-3500-1992-a5d0-ddf0-9084-48a0.ngrok.io/"; //ngrok
+const URL = "http://2efa-2806-2f0-3500-1992-3964-a29a-54cc-bdc7.ngrok.io/"; //ngrok
 // const URL = "http://localhost:3000";
 
 export default {

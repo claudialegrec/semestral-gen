@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#111317; padding:30px; height:130vh">
+  <div style="background-color:#111317; padding:30px; height:150vh">
     <div class="card text-white" style="background-color:#181A1E; text-align:left; border-radius:10px">
 
       <!-- Header -->
@@ -48,11 +48,11 @@
 
                 <!-- Ciudad -->
                 <p style="margin-bottom:0px">City:</p>
-                <p style="color:#B5B5B5">Chihuahua</p>
+                <p style="color:#B5B5B5">{{ response.city }}</p>
 
                 <!-- Estado -->
                 <p style="margin-bottom:0px">State:</p>
-                <p style="color:#B5B5B5">Chihuahua</p>
+                <p style="color:#B5B5B5">{{ response.state }}</p>
 
                 <!-- Direccion -->
                 <p style="margin-bottom:0px">Address:</p>
@@ -65,6 +65,10 @@
                 <!-- Correo -->
                 <p style="margin-bottom:0px">Email:</p>
                 <p style="color:#B5B5B5">{{ response.email }}</p>
+
+                <!-- Correo -->
+                <p style="margin-bottom:0px">Category:</p>
+                <p style="color:#B5B5B5">{{ response.category }}</p>
               </div>
 
               <div class="col" style="margin-left:120px">
@@ -97,7 +101,7 @@
                 <!-- Descripción -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Description:</p>
-                  <input v-model="desciption" type="text" class="form-control-sm">
+                  <input v-model="description" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Aforo -->
@@ -136,10 +140,22 @@
                   <input v-model="phone" type="text" class="form-control-sm">
                 </div>
 
-                <!-- Teléfono -->
+                <!-- Email -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Email:</p>
                   <input v-model="email" type="text" class="form-control-sm">
+                </div>
+
+                <!-- Categoría -->
+                <div style="margin-bottom:10px">
+                  <p style="margin-bottom:5px">Category:</p>
+                  <select v-model="category" class="form-control" id="exampleFormControlSelect1">
+                    <option>Wedding</option>
+                    <option>Children's party</option>
+                    <option>Prom</option>
+                    <option>Baptism</option>
+                    <option>Bachelorette party</option>
+                  </select>
                 </div>
               </div>
 
@@ -179,6 +195,7 @@ export default {
       edit: 0,
 
       // Modelos de inputs
+      companiId: "",
       companyName: "",
       description:"",
       capacity: "",
@@ -188,38 +205,82 @@ export default {
       address: "",
       phone: "",
       email: "",
-      packageTitle: "",
-      packageDescription: "",
-      packagePrice: "",
+      category: "",
+
+      begin: "",
+
+      // packageTitle: "",
+      // packageDescription: "",
+      // packagePrice: "",
 
       response: ""
 
     }
   },
   methods: {
+    infoInputs() {
+      if(this.begin == 0) {
+        this.companyId = this.response._id
+        this.companyName = this.response.name
+        this.description = this.response.description
+        this.capacity = this.response.capacity
+        this.city = this.response.city
+        this.state = this.response.state
+        this.address = this.response.address
+        this.phone = this.response.phone
+        this.email = this.response.email
+        this.category = this.response.category
+      } else {
+        this.getCompanyInfo()
+      }
+    },
     updCompanyInfo() {
       var json = {
-        companyId: "",
+        companyId: this.companyId,
         name: this.companyName,
         description: this.description,
-        email: "",
-        password: "",
+        email: this.email,
+        password: this.response.password,
         phone: this.phone,
         city: this.city,
         state: this.state,
-        address: this.address,
         capacity: this.capacity,
-        // packageTitle: this.packageTitle,
-        // packageDescription: this.packageDescription,
-        // packagePrice: this.packagePrice,
+        address: this.address,
+        rating: this.response.rating,
+        category: this.category,
       }
 
-      auth.API_POST('/companies/updateInfo', json, {'Content-Type': 'application/json'})
+      console.log('%c⧭', 'color: #0088cc', json)
+
+      auth.API_POST('companies/updateInfo', json, {'Content-Type': 'application/json'})
       .then((response) => {
+        this.getCompanyInfo()
         console.log('%c⧭', 'color: #ff0000', response)
         this.edit = 0;
       })
     },
+    getCompanyInfo() {
+
+      var json = {
+        companyId: this.companyId
+      }
+
+      auth.API_POST('companies/CompanyInfo', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        console.log('%c⧭', 'color: #da8a66', response)
+        this.companyId = response.data.data[0]._id
+        this.companyName = response.data.data[0].name
+        this.description = response.data.data[0].description
+        this.capacity = response.data.data[0].capacity
+        this.city = response.data.data[0].city
+        this.state = response.data.data[0].state
+        this.address = response.data.data[0].address
+        this.phone = response.data.data[0].phone
+        this.email = response.data.data[0].email
+        this.category = response.data.data[0].category
+      })
+
+    }
   },
   computed: {
     ...mapGetters(['Company/getCompanyInfo'])
@@ -229,6 +290,17 @@ export default {
 
     this.response = this['Company/getCompanyInfo']
     console.log('%c⧭', 'color: #aa00ff', this.response)
+
+    this.infoInputs()
+
+  },
+  watch: {
+    response(val){
+      if(val){
+        this.begin = 1
+        console.log('%c⧭', 'color: #d90000', this.begin)
+      }
+    }
   }
 }
 </script>

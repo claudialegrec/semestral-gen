@@ -1,11 +1,8 @@
 <template>
-  <!-- <router-view /> -->
-  <!-- <div v-if="logged == 1"> -->
-    <Sidebar/>
-    <div :style="{ 'margin-left': sidebarWidth }">
-      <router-view />
-    </div>
-  <!-- </div> -->
+  <Sidebar/>
+  <div :style="{ 'margin-left': sidebarWidth }">
+    <router-view />
+  </div>
 </template>
 
 <script>
