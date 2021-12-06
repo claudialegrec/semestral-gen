@@ -78,7 +78,7 @@
                 <h5 style="margin-bottom:20px">Packages list</h5>
                 <div class="row" v-for="(pack, key) in packageList" :key="key">
                   <div class="col">
-
+                    {{pack}}
                     <!-- Paquetes -->
                     <p style="margin-bottom:0px">{{pack.name}}:</p>
                     <p style="color:#B5B5B5">{{pack.description}}</p>
@@ -167,9 +167,12 @@
                 </div>
               </div>
               <!-- Componente de agregar paquete -->
-
-              <addPackage v-for="(pack, key) in packageList" :key="key" :packageTitle="pack.name" :packageDescription="pack.description" :packagePrice="psck.cost"/>
-
+              <div class="col">
+                <addPackage v-for="(pack, key) in packageList" :key="key" :companyId="pack.company._id" :id="pack._id" :packageTitle="pack.name" :packageDescription="pack.description" :packagePrice="pack.cost"/>
+                <button @click="createPackage()" class="btn btn-primary" v-if="edit == 1" style="margin-right:20px; background-color:#3F5AE8">
+                  + Agregar 
+                </button>
+              </div>
             </div>
 
             <!-- Botón de Guardar Cambios -->
@@ -253,6 +256,20 @@ export default {
   },
   methods: {
     ...mapMutations(['Company/updateCompany']),
+    createPackage(){
+      var json = {
+        name:"",
+        description:"",
+        cost:"",
+        companyId:""
+      }
+
+      auth('/packs/newPackage', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        console.log('%c⧭', 'color: #33cc99', response);
+        // this.packageList.push(response)
+      })
+    },
     loadPackages(){
       let json = {companyId: this.companyId}
       auth.API_POST('/packs/packageList', json, {'Content-Type': 'application/json'}).then((response) => {

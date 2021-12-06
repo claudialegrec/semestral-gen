@@ -21,13 +21,13 @@
     <div class="row">
       <div class="d-inline-flex p-2 justify-content-end">
         <!-- Botón de agregar paquete -->
-        <button @click="addNewPackage()" class="btn btn-primary" style="margin-right:20px; background-color:#3F5AE8">
-          <i class="fas fa-plus" />
+        <button @click="updatePackage()" class="btn btn-primary" style="margin-right:20px; background-color:#3F5AE8">
+          Actualizar 
         </button>
 
         <!-- Botón de eliminar paquete -->
         <button @click="deletePackage()" class="btn btn-danger" style="background-color:#E83F3F">
-          <i class="fas fa-minus" />
+          Eliminar
         </button>
       </div>
     </div>
@@ -41,30 +41,36 @@ import auth from '../logic/auth'
 export default{
   name: 'addPackage',
   props:{
+    id:String,
     packageTitle: String,
     packageDescription: String,
-    packagePrice: String
+    packagePrice: String,
+    companyId:String
   },
   data() {
     return {
       // Modelos de paquetes'
       packageInfo:{
-        packageTitle: "",
-        packageDescription: "",
-        packagePrice: ""
+        id:"",
+        name: "",
+        description: "",
+        cost: "",
+        companyId:""
       }
     }
   },
   methods: {
-    addNewPackage() {
+    updatePackage() {
             
       var json = {
-        packageTitle: this.packageTitle,
-        packageDescription: this.packageDescription,
-        packagePrice: this.packagePrice
+        packId: this.packageTitle,
+        name: this.packageTitle,
+        description: this.packageDescription,
+        cost: this.packagePrice,
+        companyId: this.$props.companyId
       }
 
-      auth.API_POST('/packs/newPackage', json, {'Content-Type': 'application/json'})
+      auth.API_POST('/packs/updatePack', json, {'Content-Type': 'application/json'})
       .then((response) => {
         console.log('%c⧭', 'color: #0066ff', response);
       })
@@ -73,9 +79,8 @@ export default{
     deletePackage() {
                   
       var json = {
-        packageTitle: this.packageTitle,
-        packageDescription: this.packageDescription,
-        packagePrice: this.packagePrice
+        packageId: this.$props.id,
+        companyId: this.$props.companyId
       }
 
       auth.API_POST('/packs/deletePack', json, {'Content-Type': 'application/json'})
@@ -86,9 +91,11 @@ export default{
     }
   },
   mounted() {
-    this.packageInfo.packageTitle = this.$props.packageTitle
-    this.packageInfo.packageDescription = this.$props.packageDescription
-    this.packageInfo.packagePrice = this.$props.packagePrice
+    this.packageInfo.name = this.$props.packageTitle
+    this.packageInfo.description = this.$props.packageDescription
+    this.packageInfo.cost = this.$props.packagePrice
+    this.packageInfo.packId = this.$props.id
+    this.packageInfo.companyId = this.$props.companyId
   },  
 }
 </script>
