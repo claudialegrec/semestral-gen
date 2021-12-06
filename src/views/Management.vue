@@ -96,21 +96,21 @@ export default {
       deleteUser() {
         console.log('%c⧭', 'color: #ff0000', "Se eliminó un usuario")
 
-      var json = {
+      // var json = {
         
-      }
+      // }
 
-      auth.API_POST('users/deleteUser', json, {'Content-Type': 'application/json'})
+      // auth.API_POST('users/deleteUser', json, {'Content-Type': 'application/json'})
 
       },
       deleteUser() {
         console.log('%c⧭', 'color: #ff0000', "Se eliminó una compañía")
 
-        var json = {
+      //   var json = {
         
-      }
+      // }
 
-      auth.API_POST('companies/deleteCompany', json, {'Content-Type': 'application/json'})
+      // auth.API_POST('companies/deleteCompany', json, {'Content-Type': 'application/json'})
 
       }
     }
