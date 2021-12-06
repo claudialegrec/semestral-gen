@@ -1,5 +1,7 @@
 <template>
-  <div style="background-color:#111317; padding:30px; height:100%">
+<div :style="{ 'margin-left': sidebarWidth }">
+  <Sidebar/>
+  <div style="background-color:#111317; padding:30px; height:150vh">
     <div class="card text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
 
       <!-- Header -->
@@ -55,13 +57,23 @@
 
     </div>
   </div>
+</div>
 </template>
 
 <script>
+import Sidebar from '@/components/sidebar/Sidebar'
+import { sidebarWidth } from '@/components/sidebar/state'
 import auth from '../logic/auth'
 import {mapState} from 'vuex'
+
 export default {
   name: 'Details',
+  components: {
+    Sidebar
+  },
+  setup() {
+    return { sidebarWidth }
+  },
   data() {
     return {
       companyInfo:{},
