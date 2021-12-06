@@ -64,7 +64,7 @@
                   <td>Chihuahua</td>
                   <td>Luigis Street</td>
                   <td>
-                    <a @click="deleteUser()" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
+                    <a @click="deleteCompany()" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
                       <i class="fas fa-trash-alt" style="margin-right:5px" />
                       Delete User
                     </a>
@@ -94,7 +94,24 @@ export default {
   data() {
     return {
       deleteUser() {
-        console.log('%c⧭', 'color: #ff0000', "borrado")
+        console.log('%c⧭', 'color: #ff0000', "Se eliminó un usuario")
+
+      var json = {
+        
+      }
+
+      auth.API_POST('users/deleteUser', json, {'Content-Type': 'application/json'})
+
+      },
+      deleteUser() {
+        console.log('%c⧭', 'color: #ff0000', "Se eliminó una compañía")
+
+        var json = {
+        
+      }
+
+      auth.API_POST('companies/deleteCompany', json, {'Content-Type': 'application/json'})
+
       }
     }
   }
