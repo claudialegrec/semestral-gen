@@ -43,6 +43,11 @@ const routes = [
     name: 'CompanyInfo',
     component: () => import('../views/CompanyInfo.vue')
   },
+  {
+    path: '/Management',
+    name: 'Management',
+    component: () => import('../views/Management.vue')
+  },
 ]
 
 const router = createRouter({

@@ -1,4 +1,6 @@
 <template>
+<div :style="{ 'margin-left': sidebarWidth }">
+  <Sidebar/>
   <div style="background-color:#111317; padding:30px; height:100vh">
     <div class="card text-white" style="background-color:#181A1E; text-align:left; border-radius:10px">
 
@@ -11,7 +13,7 @@
         <div v-if="edit == 0" class="ml-auto p-2">
           <a @click="edit = 1" class="btn btn-primary" style="background-color:#3F5AE8">
             <i class="fas fa-pen" style="margin-right:5px" />
-            Editar
+            Edit
           </a>
         </div>
 
@@ -123,13 +125,22 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
+import Sidebar from '@/components/sidebar/Sidebar'
+import { sidebarWidth } from '@/components/sidebar/state'
 import auth from '../logic/auth' 
 import {mapGetters, mapActions} from "vuex"
 
 export default {
+  components: {
+    Sidebar
+  },
+  setup() {
+    return { sidebarWidth }
+  },
   data() {
     return {
       edit: 0,
@@ -220,3 +231,26 @@ export default {
   }
 }
 </script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>

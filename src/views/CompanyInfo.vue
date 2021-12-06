@@ -1,4 +1,6 @@
 <template>
+<div :style="{ 'margin-left': sidebarWidth }">
+  <Sidebar/>
   <div style="background-color:#111317; padding:30px; height:150vh">
     <div class="card text-white" style="background-color:#181A1E; text-align:left; border-radius:10px">
 
@@ -11,7 +13,7 @@
         <div v-if="edit == 0" class="ml-auto p-2">
           <a @click="edit = 1" class="btn btn-primary" style="background-color:#3F5AE8">
             <i class="fas fa-pen" style="margin-right:5px" />
-            Editar
+            Edit
           </a>
         </div>
 
@@ -177,9 +179,12 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
+import Sidebar from '@/components/sidebar/Sidebar'
+import { sidebarWidth } from '@/components/sidebar/state'
 import {mapGetters} from "vuex"
 
 import addPackage from '../components/addPackage.vue'
@@ -187,7 +192,11 @@ import auth from '../logic/auth'
 
 export default {
   components:{
+    Sidebar,
     addPackage
+  },
+  setup() {
+    return { sidebarWidth }
   },
   data() {
     return {
@@ -219,20 +228,16 @@ export default {
   },
   methods: {
     infoInputs() {
-      if(this.begin == 0) {
-        this.companyId = this.response._id
-        this.companyName = this.response.name
-        this.description = this.response.description
-        this.capacity = this.response.capacity
-        this.city = this.response.city
-        this.state = this.response.state
-        this.address = this.response.address
-        this.phone = this.response.phone
-        this.email = this.response.email
-        this.category = this.response.category
-      } else {
-        this.getCompanyInfo()
-      }
+      this.companyId = this.response._id
+      this.companyName = this.response.name
+      this.description = this.response.description
+      this.capacity = this.response.capacity
+      this.city = this.response.city
+      this.state = this.response.state
+      this.address = this.response.address
+      this.phone = this.response.phone
+      this.email = this.response.email
+      this.category = this.response.category
     },
     updCompanyInfo() {
       var json = {
@@ -259,28 +264,28 @@ export default {
         this.edit = 0;
       })
     },
-    getCompanyInfo() {
+    // getCompanyInfo() {
 
-      var json = {
-        companyId: this.companyId
-      }
+    //   var json = {
+    //     companyId: this.companyId
+    //   }
 
-      auth.API_POST('companies/CompanyInfo', json, {'Content-Type': 'application/json'})
-      .then((response) => {
-        console.log('%c⧭', 'color: #da8a66', response)
-        this.companyId = response.data.data[0]._id
-        this.companyName = response.data.data[0].name
-        this.description = response.data.data[0].description
-        this.capacity = response.data.data[0].capacity
-        this.city = response.data.data[0].city
-        this.state = response.data.data[0].state
-        this.address = response.data.data[0].address
-        this.phone = response.data.data[0].phone
-        this.email = response.data.data[0].email
-        this.category = response.data.data[0].category
-      })
+    //   auth.API_POST('companies/CompanyInfo', json, {'Content-Type': 'application/json'})
+    //   .then((response) => {
+    //     console.log('%c⧭', 'color: #da8a66', response)
+    //     this.companyId = response.data.data[0]._id
+    //     this.companyName = response.data.data[0].name
+    //     this.description = response.data.data[0].description
+    //     this.capacity = response.data.data[0].capacity
+    //     this.city = response.data.data[0].city
+    //     this.state = response.data.data[0].state
+    //     this.address = response.data.data[0].address
+    //     this.phone = response.data.data[0].phone
+    //     this.email = response.data.data[0].email
+    //     this.category = response.data.data[0].category
+    //   })
 
-    }
+    // }
   },
   computed: {
     ...mapGetters(['Company/getCompanyInfo'])
@@ -295,12 +300,30 @@ export default {
 
   },
   watch: {
-    response(val){
-      if(val){
-        this.begin = 1
-        console.log('%c⧭', 'color: #d90000', this.begin)
-      }
-    }
+
   }
 }
 </script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
