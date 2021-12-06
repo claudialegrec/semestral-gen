@@ -39,6 +39,9 @@ export default {
 
     }
   },
+  // computed:{
+  //   ...mapGetters([''])
+  // },
   methods: {
     ...mapMutations(['setCompanyDetails']),
     showDetails(companyId) {

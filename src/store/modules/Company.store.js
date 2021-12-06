@@ -27,14 +27,19 @@ const getters = {
 };
 
 const actions = {
+  // async fetchCompanyInfo({commit}, json){
+  //   await auth.API_POST('/companies/CompanyInfo', json, {'Content-Type': 'application/json'})
+  //   .then((response) => {
+  //     console.log('%c⧭', 'color: #9900ff', response);
+  //     commit('setCompaniesList', response.data.data);
+  //   })
+  // },
   async fetchCompaniesList({commit}){
-    var res = await auth.API_GET('/companies/companiesInfoList', {'Content-Type': 'application/json'})
+    await auth.API_GET('/companies/companiesInfoList', {'Content-Type': 'application/json'})
     .then((response) => {
-      console.log('%c⧭', 'color: #0066ff', response);
-      commit('setCompaniesList', response);
+      console.log('%c⧭', 'color: #ff00f2', response);
+      commit('setCompaniesList', response.data.data);
     })
-
-    return res
   },
   async fetchCompanyUser({commit}, loginInfo){
     auth.API_POST('companies/Login', loginInfo, {'Content-Type': 'application/json'})

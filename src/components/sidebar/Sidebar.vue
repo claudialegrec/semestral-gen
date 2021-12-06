@@ -24,7 +24,7 @@
       <SidebarLink to="/Schedule" icon="fas fa-calendar-alt">Schedule</SidebarLink>
       <SidebarLink to="/UserInfo" icon="fas fa-user">User Info</SidebarLink>
       <SidebarLink to="/CompanyInfo" icon="fas fa-building">Company Info</SidebarLink>
-      <SidebarLink to="/Management" icon="fas fa-user-cog">Management</SidebarLink>
+      <SidebarLink to="/Management" icon="fas fa-user-cog" v-if="userId == '61a8ae49482015eba2a92bea'">Management</SidebarLink>
     </div>
 
     <div class="flex-column mb-auto" style="margin-top:250px">
@@ -45,10 +45,24 @@
 <script>
 import SidebarLink from './SidebarLink'
 import { collapsed, toggleSidebar, sidebarWidth } from './state'
+import {mapGetters} from "vuex"
 
 export default {
   props: {},
   components: { SidebarLink },
+  data() {
+    return {
+      userId:""
+    }
+  },
+  computed:{
+    ...mapGetters(['Users/getUserInfo'])
+  },
+  created() {
+    this.userId = this['Users/getUserInfo']._id
+    console.log('%c⧭', 'color: #ffcc00', this.userId, "userId SideBar")
+
+  },
   setup() {
     return { collapsed, toggleSidebar, sidebarWidth }
   }

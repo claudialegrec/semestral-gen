@@ -12,12 +12,20 @@ const store = createStore({
   state () {
     return {
       count: 0,
-      companyId:""
+      companyId:"",
+      packageId:"",
+      userType:0
     }
   },
   mutations: {
     setCompanyDetails (state, id) {
       state.companyId = id
+    },
+    setPackageDetails (state, id) {
+      state.packageId = id
+    },
+    setUserType (state, type) {
+      state.userType = type
     }
   },
   modules:{

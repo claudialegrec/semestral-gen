@@ -66,12 +66,14 @@ export default {
     ...mapActions(['Company/fetchCompaniesList']),
     loadCompaniesList(){
       // this['Company/fetchCompaniesList']()
-      // console.log('%c⧭', 'color: #00bf00', this['Company/getCompaniesList'])
+      console.log('%c⧭', 'color: #00bf00', this['Company/getCompaniesList'])
+      // this.companiesList = this['Company/getCompaniesList']
       // // console.log('%c⧭', 'color: #bfffc8', this['Company/fetchCompaniesList'])
       auth.API_GET('/companies/companiesInfoList', {'Content-Type': 'application/json'})
       .then((response) => {
         console.log(response.data.data)
         this.companiesList = response.data.data;
+        this['Company/fetchCompaniesList']()
       })
     }
   },
