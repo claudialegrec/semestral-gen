@@ -27,13 +27,15 @@ const getters = {
 };
 
 const actions = {
-  // async fetchCompanyInfo({commit}, json){
-  //   await auth.API_POST('/companies/CompanyInfo', json, {'Content-Type': 'application/json'})
-  //   .then((response) => {
-  //     console.log('%c⧭', 'color: #9900ff', response);
-  //     commit('setCompaniesList', response.data.data);
-  //   })
-  // },
+  async fetchCompanyInfo({commit}, json){
+
+    console.log('%c⧭', 'color: #7f2200', json, "json company");
+    await auth.API_POST('/companies/CompanyInfo', json, {'Content-Type': 'application/json'})
+    .then((response) => {
+      console.log('%c⧭', 'color: #9900ff', response);
+      commit('setCompaniesList', response.data.data);
+    })
+  },
   async fetchCompaniesList({commit}){
     await auth.API_GET('/companies/companiesInfoList', {'Content-Type': 'application/json'})
     .then((response) => {
@@ -42,9 +44,10 @@ const actions = {
     })
   },
   async fetchCompanyUser({commit}, loginInfo){
-    auth.API_POST('companies/Login', loginInfo, {'Content-Type': 'application/json'})
+    console.log('%c⧭', 'color: #7f2200', loginInfo, "loginInfo company");
+    auth.API_POST('/companies/Login', loginInfo, {'Content-Type': 'application/json'})
     .then((response) => {
-      console.log(response);
+      console.log(response, "login info");
       commit('setCompanyUser', response.data.data);
     })
   },

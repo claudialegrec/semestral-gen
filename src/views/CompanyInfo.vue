@@ -29,6 +29,7 @@
       <div v-if="edit == 0" class="row" style="padding:30px; margin-top:-30px">
         <div class="col">
           <div style="padding:10px">
+            {{packageList}}
             <!-- Datos de usuario -->
             <div class="row">
               <div class="col-4">
@@ -75,11 +76,16 @@
 
               <div class="col" style="margin-left:120px">
                 <h5 style="margin-bottom:20px">Packages list</h5>
+                <div class="row" v-for="(pack, key) in packageList" :key="key">
+                  <div class="col">
 
-                <!-- Paquetes -->
-                <p style="margin-bottom:0px">Package 1:</p>
-                <p style="color:#B5B5B5">Dinner, music, services and decoration.</p>
-                <p style="color:#B5B5B5; margin-top:-15px">$500,000 MXN</p>
+                    <!-- Paquetes -->
+                    <p style="margin-bottom:0px">{{pack.name}}:</p>
+                    <p style="color:#B5B5B5">{{pack.description}}</p>
+                    <p style="color:#B5B5B5; margin-top:-15px">${{pack.cost}} MXN</p>
+
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -160,9 +166,9 @@
                   </select>
                 </div>
               </div>
-
               <!-- Componente de agregar paquete -->
-              <addPackage />
+
+              <addPackage v-for="(pack, key) in packageList" :key="key" :packageTitle="pack.name" :packageDescription="pack.description" :packagePrice="psck.cost"/>
 
             </div>
 
@@ -185,7 +191,7 @@
 <script>
 import Sidebar from '@/components/sidebar/Sidebar'
 import { sidebarWidth } from '@/components/sidebar/state'
-import {mapGetters} from "vuex"
+import {mapGetters, mapMutations} from "vuex"
 
 import addPackage from '../components/addPackage.vue'
 import auth from '../logic/auth' 
@@ -204,6 +210,22 @@ export default {
       edit: 0,
 
       // Modelos de inputs
+      companyInfo:{
+        // companiId: "",
+        // companyName: "",
+        // description:"",
+        // capacity: "",
+        // image: "",
+        // city: "",
+        // state: "",
+        // address: "",
+        // phone: "",
+        // email: "",
+        // category: "",
+      },
+
+      packageList:[],
+
       companiId: "",
       companyName: "",
       description:"",
@@ -218,26 +240,39 @@ export default {
 
       begin: "",
 
-      // packageTitle: "",
-      // packageDescription: "",
-      // packagePrice: "",
+      packageTitle: "",
+      packageDescription: "",
+      packagePrice: "",
 
       response: ""
 
     }
   },
+  computed:{
+    ...mapGetters(['Company/getCompanyInfo'])
+  },
   methods: {
+    ...mapMutations(['Company/updateCompany']),
+    loadPackages(){
+      let json = {companyId: this.companyId}
+      auth.API_POST('/packs/packageList', json, {'Content-Type': 'application/json'}).then((response) => {
+
+        console.log('%c⧭', 'color: #1d5673', response, "loadPackages")
+        this.packageList = response.data.data
+        console.log('%c⧭', 'color: #b30000', this.packageList, "packageList")
+      })
+    },
     infoInputs() {
-      this.companyId = this.response._id
-      this.companyName = this.response.name
-      this.description = this.response.description
-      this.capacity = this.response.capacity
-      this.city = this.response.city
-      this.state = this.response.state
-      this.address = this.response.address
-      this.phone = this.response.phone
-      this.email = this.response.email
-      this.category = this.response.category
+      this.companyId = this.companyInfo._id
+      this.companyName = this.companyInfo.name
+      this.description = this.companyInfo.description
+      this.capacity = this.companyInfo.capacity
+      this.city = this.companyInfo.city
+      this.state = this.companyInfo.state
+      this.address = this.companyInfo.address
+      this.phone = this.companyInfo.phone
+      this.email = this.companyInfo.email
+      this.category = this.companyInfo.category
     },
     updCompanyInfo() {
       var json = {
@@ -257,46 +292,52 @@ export default {
 
       console.log('%c⧭', 'color: #0088cc', json)
 
-      auth.API_POST('companies/updateInfo', json, {'Content-Type': 'application/json'})
-      .then((response) => {
-        this.getCompanyInfo()
-        console.log('%c⧭', 'color: #ff0000', response)
+      this['Company/updateCompany'](json).then(() => {
         this.edit = 0;
       })
+
+      // auth.API_POST('companies/updateInfo', json, {'Content-Type': 'application/json'})
+      // .then((response) => {
+      //   this.getCompanyInfo()
+      //   console.log('%c⧭', 'color: #ff0000', response)
+      //   this.edit = 0;
+      // })
     },
-    // getCompanyInfo() {
+    getCompanyInfo() {
 
-    //   var json = {
-    //     companyId: this.companyId
-    //   }
+      this.companyInfo = this['Company/getCompanyInfo']
+      console.log('%c⧭', 'color: #e5de73', this.companyInfo, "companyInfo")
+      this.infoInputs()
+      this.loadPackages()
+      // var json = {
+      //   companyId: this.companyId
+      // }
 
-    //   auth.API_POST('companies/CompanyInfo', json, {'Content-Type': 'application/json'})
-    //   .then((response) => {
-    //     console.log('%c⧭', 'color: #da8a66', response)
-    //     this.companyId = response.data.data[0]._id
-    //     this.companyName = response.data.data[0].name
-    //     this.description = response.data.data[0].description
-    //     this.capacity = response.data.data[0].capacity
-    //     this.city = response.data.data[0].city
-    //     this.state = response.data.data[0].state
-    //     this.address = response.data.data[0].address
-    //     this.phone = response.data.data[0].phone
-    //     this.email = response.data.data[0].email
-    //     this.category = response.data.data[0].category
-    //   })
+      // auth.API_POST('companies/CompanyInfo', json, {'Content-Type': 'application/json'})
+      // .then((response) => {
+      //   console.log('%c⧭', 'color: #da8a66', response)
+      //   this.companyId = response.data.data[0]._id
+      //   this.companyName = response.data.data[0].name
+      //   this.description = response.data.data[0].description
+      //   this.capacity = response.data.data[0].capacity
+      //   this.city = response.data.data[0].city
+      //   this.state = response.data.data[0].state
+      //   this.address = response.data.data[0].address
+      //   this.phone = response.data.data[0].phone
+      //   this.email = response.data.data[0].email
+      //   this.category = response.data.data[0].category
+      // })
 
-    // }
-  },
-  computed: {
-    ...mapGetters(['Company/getCompanyInfo'])
+    }
   },
   mounted() {
-    console.log('%c⧭', 'color: #00e600', this['Company/getCompanyInfo'])
+    this.getCompanyInfo()
+    console.log('%c⧭', 'color: #00e600', this['Company/getCompanyInfo'], "company info")
 
     this.response = this['Company/getCompanyInfo']
     console.log('%c⧭', 'color: #aa00ff', this.response)
 
-    this.infoInputs()
+    
 
   },
   watch: {

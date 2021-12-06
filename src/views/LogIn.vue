@@ -27,7 +27,7 @@
 
       <div class="row" style="margin-top:10px">
         <label class="labelLogin">Password</label>
-        <input type="password" v-model="password" class="form-control" placeholder="•••••••" />
+        <input type="password" v-model="password" class="form-control" placeholder="Password" />
       </div>
 
       <br>
@@ -45,7 +45,7 @@
 
 <script>
 // import axios from 'axios'
-import {mapActions, mapGetters} from "vuex"
+import {mapActions, mapGetters, mapMutations} from "vuex"
 
 export default {
   name: 'LogIn',
@@ -65,6 +65,7 @@ export default {
   methods: {
 
     ...mapActions(['Users/fetchUser', 'Company/fetchCompanyUser']),
+    ...mapMutations(['setUserType']),
     login() {
       
       var json = {
@@ -73,11 +74,13 @@ export default {
       }
 
       if(this.usertype == 1){
+        this.setUserType(this.usertype)
         this['Users/fetchUser'](json)
         .then(() => {
           this.$router.replace({ path: 'Home'})
         })
       }else{
+        this.setUserType(this.usertype)
         this['Company/fetchCompanyUser'](json)
         .then(() => {
 
