@@ -103,7 +103,7 @@ export default {
       // auth.API_POST('users/deleteUser', json, {'Content-Type': 'application/json'})
 
       },
-      deleteUser() {
+      deleteCompany() {
         console.log('%c⧭', 'color: #ff0000', "Se eliminó una compañía")
 
       //   var json = {
