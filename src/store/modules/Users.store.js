@@ -23,6 +23,15 @@ const getters = {
 };
 
 const actions = {
+
+  async LoadUserInfo({commit}, userId){
+    await auth.API_POST('/users/Login', userId, {'Content-Type': 'application/json'})
+    .then((response) => {
+      console.log(response);
+      commit('setUser', response.data.data);
+    })
+  },
+
   async fetchUser({commit}, loginInfo){
     await auth.API_POST('/users/Login', loginInfo, {'Content-Type': 'application/json'})
     .then((response) => {

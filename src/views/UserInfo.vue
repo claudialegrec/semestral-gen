@@ -32,19 +32,27 @@
               <!-- Nombre -->
               <div class="col">
                 <p style="margin-bottom:0px">Name:</p>
-                <p style="color:#B5B5B5">Alfredo</p>
+                <p style="color:#B5B5B5">{{userInfo.name}}</p>
 
               <!-- Apellidos -->
                 <p style="margin-bottom:0px">Last Name:</p>
-                <p style="color:#B5B5B5">García Yapor</p>
+                <p style="color:#B5B5B5">{{userInfo.lastName}}</p>
 
                 <!-- Teléfono -->
                 <p style="margin-bottom:0px">Phone:</p>
-                <p style="color:#B5B5B5">614 154 9058</p>
+                <p style="color:#B5B5B5">{{userInfo.phone}}</p>
 
                 <!-- Email -->
                 <p style="margin-bottom:0px">Email:</p>
-                <p style="color:#B5B5B5">alfredogy@outlook.com</p>
+                <p style="color:#B5B5B5">{{userInfo.email}}</p>
+
+                <!-- Direccion -->
+                <p style="margin-bottom:0px">Address:</p>
+                <p style="color:#B5B5B5">{{userInfo.adress}}</p>
+
+                <!-- Localizacion -->
+                <p style="margin-bottom:0px">Localización:</p>
+                <p style="color:#B5B5B5" v-if="userInfo.city != '' && userInfo.state!= ''">{{userInfo.city}}, {{userInfo.state}}</p>
               </div>
             </div>
           </div>
@@ -61,25 +69,43 @@
                 <!-- Nombre -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Name:</p>
-                  <input v-model="name" type="text" class="form-control-sm" placeholder="Alfredo">
+                  <input v-model="name" type="text" class="form-control-sm" placeholder="Name">
                 </div>
 
                 <!-- Apellidos -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Last Name:</p>
-                  <input v-model="lastName" type="text" class="form-control-sm" placeholder="García Yapor">
+                  <input v-model="lastName" type="text" class="form-control-sm" placeholder="Last name">
                 </div>
 
                 <!-- Teléfono -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Phone:</p>
-                  <input v-model="phone" type="text" class="form-control-sm" placeholder="614 154 9058">
+                  <input v-model="phone" type="text" class="form-control-sm" placeholder="Phone">
                 </div>
 
-                <!-- Teléfono -->
+                <!-- Email -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">E-mail:</p>
-                  <input v-model="email" type="text" class="form-control-sm" placeholder="alfredogy@outlook.com">
+                  <input v-model="email" type="text" class="form-control-sm" placeholder="E-mail">
+                </div>
+
+                <!-- State -->
+                <div style="margin-bottom:10px">
+                  <p style="margin-bottom:5px">Address:</p>
+                  <input v-model="address" type="text" class="form-control-sm" placeholder="Address">
+                </div>
+
+                <!-- City -->
+                <div style="margin-bottom:10px">
+                  <p style="margin-bottom:5px">City:</p>
+                  <input v-model="city" type="text" class="form-control-sm" placeholder="City">
+                </div>
+
+                <!-- State -->
+                <div style="margin-bottom:10px">
+                  <p style="margin-bottom:5px">State:</p>
+                  <input v-model="state" type="text" class="form-control-sm" placeholder="alfredogy@outlook.com">
                 </div>
 
                 <!-- Botón de Guardar Cambios -->
@@ -101,6 +127,7 @@
 
 <script>
 import auth from '../logic/auth' 
+import {mapGetters, mapMutations} from "vuex"
 
 export default {
   data() {
@@ -108,27 +135,81 @@ export default {
       edit: 0,
 
       // Modelos de inputs
+      userInfo:{
+        name: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        address:"",
+        city:"",
+        state:""
+      },
+
+
       name: "",
       lastName: "",
       phone: "",
       email: "",
+      address:"",
+      city:"",
+      state:"",
+      password:"",
+      userId:""
+
 
     }
   },
+  computed:{
+    ...mapGetters(['Users/getUserInfo'])
+  },
+  mounted() {
+    // this['Users/getUserInfo']
+    console.log('%c⧭', 'color: #007300', this['Users/getUserInfo'])
+    this.loadUserInfo();
+  },
   methods: {
+    ...mapMutations(['Users/LoadUserInfo']),
+    loadUserInfo(){
+      this.userInfo.name = this['Users/getUserInfo'].name;
+      this.userInfo.lastName = this['Users/getUserInfo'].lastName;
+      this.userInfo.phone = this['Users/getUserInfo'].phone;
+      this.userInfo.email = this['Users/getUserInfo'].email;
+      this.userInfo.address = this['Users/getUserInfo'].address;
+      this.userInfo.city = this['Users/getUserInfo'].city;
+      this.userInfo.state = this['Users/getUserInfo'].state;
+
+      //inputs
+      this.name = this['Users/getUserInfo'].name;
+      this.lastName = this['Users/getUserInfo'].lastName;
+      this.phone = this['Users/getUserInfo'].phone;
+      this.email = this['Users/getUserInfo'].email;
+      this.address = this['Users/getUserInfo'].address;
+      this.city = this['Users/getUserInfo'].city;
+      this.state = this['Users/getUserInfo'].state;
+      this.password = this['Users/getUserInfo'].password;
+      this.userId = this['Users/getUserInfo']._id;
+      console.log('%c⧭', 'color: #006dcc', this.userInfo, "userInfo")
+    },
     updInfoUser() {
       
       var json = {
+        userId: this.userId,
         name: this.name,
         lastName: this.lastName,
         phone: this.phone,
-        email: this.email
+        email: this.email,
+        address: this.address,
+        city: this.city,
+        state: this.state,
+        password: this.password
       }
 
       auth.API_POST('/users/updateInfo', json, {'Content-Type': 'application/json'})
       .then((response) => {
         this.edit = 0
         console.log('%c⧭', 'color: #0066ff', response);
+        this['Users/LoadUserInfo'](this.userId);
+        this.loadUserInfo();
       })
       
     }

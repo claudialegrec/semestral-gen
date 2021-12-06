@@ -32,8 +32,7 @@ export default {
     id:String,
     title:String,
     rating:String,
-    text:String,
-    id:String
+    text:String
   },
   data() {
     return {
