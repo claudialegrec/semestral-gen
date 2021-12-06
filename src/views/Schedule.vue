@@ -15,7 +15,7 @@
           <div class="col">
 
             <!-- Contenedor de detalles de citas -->
-            <div class="card" style="width:73rem; background-color:#292A33; border-radius:10px">
+            <div class="card" style="background-color:#292A33; border-radius:10px">
               <div class="card-body">
 
                 <!-- Titulo del card -->
@@ -56,11 +56,11 @@
                     <div class="col d-flex justify-content-end">
                       <a @click="edit = 1" class="btn btn-primary" style="background-color:#3F5AE8">
                         <i class="fas fa-pen" style="margin-right:5px" />
-                        Editar
+                        Edit
                       </a>
                       <a href="#" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
                         <i class="fas fa-trash-alt" style="margin-right:5px" />
-                        Cancelar
+                        Cancel
                       </a>
                     </div>
                   </div>

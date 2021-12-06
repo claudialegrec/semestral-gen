@@ -24,6 +24,7 @@
       <SidebarLink to="/Schedule" icon="fas fa-calendar-alt">Schedule</SidebarLink>
       <SidebarLink to="/UserInfo" icon="fas fa-user">User Info</SidebarLink>
       <SidebarLink to="/CompanyInfo" icon="fas fa-building">Company Info</SidebarLink>
+      <SidebarLink to="/Management" icon="fas fa-user-cog">Management</SidebarLink>
     </div>
 
     <div class="flex-column mb-auto" style="margin-top:250px">
