@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#111317; padding:30px; height:100vh">
+  <div style="background-color:#111317; padding:30px; height:150vh">
     <div class="card text-white" style="background-color:#181A1E; text-align:left; border-radius:10px">
 
       <!-- Header -->
@@ -32,27 +32,43 @@
               <div class="col-4">
                 <!-- Nombre -->
                 <p style="margin-bottom:0px">Company Name:</p>
-                <p style="color:#B5B5B5">Celebráre</p>
+                <p style="color:#B5B5B5">{{ response.name }}</p>
 
                 <!-- Descripción -->
                 <p style="margin-bottom:0px">Description:</p>
-                <p style="color:#B5B5B5">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p style="color:#B5B5B5">{{ response.description }}</p>
 
                 <!-- Aforo -->
                 <p style="margin-bottom:0px">Capacity:</p>
-                <p style="color:#B5B5B5">100 - 150</p>
+                <p style="color:#B5B5B5">{{ response.capacity }}</p>
 
                 <!-- Imagen -->
                 <p style="margin-bottom:0px">Image:</p>
                 <p style="color:#B5B5B5">celebrare.png</p>
 
-                <!-- Ubicación -->
-                <p style="margin-bottom:0px">Location:</p>
-                <p style="color:#B5B5B5">Av Francisco Villa 5510, Saucito, 31110 Chihuahua, Chih.</p>
+                <!-- Ciudad -->
+                <p style="margin-bottom:0px">City:</p>
+                <p style="color:#B5B5B5">{{ response.city }}</p>
+
+                <!-- Estado -->
+                <p style="margin-bottom:0px">State:</p>
+                <p style="color:#B5B5B5">{{ response.state }}</p>
+
+                <!-- Direccion -->
+                <p style="margin-bottom:0px">Address:</p>
+                <p style="color:#B5B5B5">{{ response.address }}</p>
 
                 <!-- Teléfono -->
                 <p style="margin-bottom:0px">Phone:</p>
-                <p style="color:#B5B5B5">614 425 5250</p>
+                <p style="color:#B5B5B5">{{ response.phone }}</p>
+
+                <!-- Correo -->
+                <p style="margin-bottom:0px">Email:</p>
+                <p style="color:#B5B5B5">{{ response.email }}</p>
+
+                <!-- Correo -->
+                <p style="margin-bottom:0px">Category:</p>
+                <p style="color:#B5B5B5">{{ response.category }}</p>
               </div>
 
               <div class="col" style="margin-left:120px">
@@ -79,81 +95,78 @@
                 <!-- Nombre de la compañía -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Company Name:</p>
-                  <input type="text" class="form-control-sm" placeholder="Celebráre">
+                  <input v-model="companyName" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Descripción -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Description:</p>
-                  <input type="text" class="form-control-sm" placeholder="Some quick example text to build on the card title and make up the bulk of the card's content.">
+                  <input v-model="description" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Aforo -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Capacity:</p>
-                  <input type="text" class="form-control-sm" placeholder="100-150">
+                  <input v-model="capacity" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Imágen -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Image:</p>
-                  <input type="text" class="form-control-sm" placeholder="celebrare.png">
+                  <input v-model="image" type="text" class="form-control-sm">
                 </div>
 
-                <!-- Ubicación -->
+                <!-- Ciudad -->
                 <div style="margin-bottom:10px">
-                  <p style="margin-bottom:5px">Location:</p>
-                  <input type="text" class="form-control-sm" placeholder="Av Francisco Villa 5510, Saucito, 31110 Chihuahua, Chih.">
+                  <p style="margin-bottom:5px">City:</p>
+                  <input v-model="city" type="text" class="form-control-sm">
+                </div>
+
+                <!-- Estado -->
+                <div style="margin-bottom:10px">
+                  <p style="margin-bottom:5px">State:</p>
+                  <input v-model="state" type="text" class="form-control-sm">
+                </div>
+
+                <!-- Dirección -->
+                <div style="margin-bottom:10px">
+                  <p style="margin-bottom:5px">Address:</p>
+                  <input v-model="address" type="text" class="form-control-sm">
                 </div>
 
                 <!-- Teléfono -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Phone:</p>
-                  <input type="text" class="form-control-sm" placeholder="614 425 5250">
+                  <input v-model="phone" type="text" class="form-control-sm">
+                </div>
+
+                <!-- Email -->
+                <div style="margin-bottom:10px">
+                  <p style="margin-bottom:5px">Email:</p>
+                  <input v-model="email" type="text" class="form-control-sm">
+                </div>
+
+                <!-- Categoría -->
+                <div style="margin-bottom:10px">
+                  <p style="margin-bottom:5px">Category:</p>
+                  <select v-model="category" class="form-control" id="exampleFormControlSelect1">
+                    <option>Wedding</option>
+                    <option>Children's party</option>
+                    <option>Prom</option>
+                    <option>Baptism</option>
+                    <option>Bachelorette party</option>
+                  </select>
                 </div>
               </div>
 
-              <div class="col">
-                <h5 style="margin-bottom:20px">Packages list</h5>
-
-                <!-- Nombre del paquete -->
-                <div style="margin-bottom:10px">
-                  <input type="text" class="form-control-sm" placeholder="Package 1">
-                </div>
-
-                <!-- Descripción del paquete -->
-                <div style="margin-bottom:10px">
-                  <input type="text" class="form-control-sm" placeholder="Dinner, music, services and decoration.">
-                </div>
-
-                <!-- Precio del paquete -->
-                <div style="margin-bottom:10px">
-                  <input type="text" class="form-control-sm" placeholder="$500,000 MXN">
-                </div>
-
-                <hr>
-
-                <div class="row">
-                  <div class="d-inline-flex p-2 justify-content-end">
-                    <!-- Botón de agregar paquete -->
-                    <button class="btn btn-primary" style="margin-right:20px; background-color:#3F5AE8">
-                      <i class="fas fa-plus" />
-                    </button>
-
-                    <!-- Botón de eliminar paquete -->
-                    <button class="btn btn-danger" style="background-color:#E83F3F">
-                      <i class="fas fa-minus" />
-                    </button>
-                  </div>
-                </div>
-
-              </div>
+              <!-- Componente de agregar paquete -->
+              <addPackage />
 
             </div>
 
             <!-- Botón de Guardar Cambios -->
             <div class="d-flex justify-content-end" style="margin-top:30px">
-              <a @click="edit = 0" class="btn btn-primary" style="background-color:#3F5AE8">
+              <a @click="updCompanyInfo()" class="btn btn-primary" style="background-color:#3F5AE8">
                 <i class="fas fa-save" style="margin-right:5px" />
                 Save
               </a>
@@ -167,14 +180,127 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex"
+
+import addPackage from '../components/addPackage.vue'
+import auth from '../logic/auth' 
+
 export default {
+  components:{
+    addPackage
+  },
   data() {
     return {
+      // Variable de edición
       edit: 0,
+
+      // Modelos de inputs
+      companiId: "",
+      companyName: "",
+      description:"",
+      capacity: "",
+      image: "",
+      city: "",
+      state: "",
+      address: "",
+      phone: "",
+      email: "",
+      category: "",
+
+      begin: "",
+
+      // packageTitle: "",
+      // packageDescription: "",
+      // packagePrice: "",
+
+      response: ""
+
     }
   },
   methods: {
+    infoInputs() {
+      if(this.begin == 0) {
+        this.companyId = this.response._id
+        this.companyName = this.response.name
+        this.description = this.response.description
+        this.capacity = this.response.capacity
+        this.city = this.response.city
+        this.state = this.response.state
+        this.address = this.response.address
+        this.phone = this.response.phone
+        this.email = this.response.email
+        this.category = this.response.category
+      } else {
+        this.getCompanyInfo()
+      }
+    },
+    updCompanyInfo() {
+      var json = {
+        companyId: this.companyId,
+        name: this.companyName,
+        description: this.description,
+        email: this.email,
+        password: this.response.password,
+        phone: this.phone,
+        city: this.city,
+        state: this.state,
+        capacity: this.capacity,
+        address: this.address,
+        rating: this.response.rating,
+        category: this.category,
+      }
 
+      console.log('%c⧭', 'color: #0088cc', json)
+
+      auth.API_POST('companies/updateInfo', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        this.getCompanyInfo()
+        console.log('%c⧭', 'color: #ff0000', response)
+        this.edit = 0;
+      })
+    },
+    getCompanyInfo() {
+
+      var json = {
+        companyId: this.companyId
+      }
+
+      auth.API_POST('companies/CompanyInfo', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        console.log('%c⧭', 'color: #da8a66', response)
+        this.companyId = response.data.data[0]._id
+        this.companyName = response.data.data[0].name
+        this.description = response.data.data[0].description
+        this.capacity = response.data.data[0].capacity
+        this.city = response.data.data[0].city
+        this.state = response.data.data[0].state
+        this.address = response.data.data[0].address
+        this.phone = response.data.data[0].phone
+        this.email = response.data.data[0].email
+        this.category = response.data.data[0].category
+      })
+
+    }
+  },
+  computed: {
+    ...mapGetters(['Company/getCompanyInfo'])
+  },
+  mounted() {
+    console.log('%c⧭', 'color: #00e600', this['Company/getCompanyInfo'])
+
+    this.response = this['Company/getCompanyInfo']
+    console.log('%c⧭', 'color: #aa00ff', this.response)
+
+    this.infoInputs()
+
+  },
+  watch: {
+    response(val){
+      if(val){
+        this.begin = 1
+        console.log('%c⧭', 'color: #d90000', this.begin)
+      }
+    }
   }
 }
 </script>

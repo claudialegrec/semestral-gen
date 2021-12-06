@@ -25,14 +25,15 @@
 </template>
 
 <script>
-import {mapMutations} from "vuex"
+import {mapMutations} from 'vuex'
 export default {
   name: 'CardService',
   props:{
     id:String,
     title:String,
     rating:String,
-    text:String
+    text:String,
+    id:String
   },
   data() {
     return {
@@ -42,7 +43,7 @@ export default {
   methods: {
     ...mapMutations(['setCompanyDetails']),
     showDetails(companyId) {
-      this.setCompanyDetails(companyId);
+      this.setCompanyDetails(companyId)
       this.$router.replace({ path: 'Details' })
     }
   }

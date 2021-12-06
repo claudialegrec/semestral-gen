@@ -1,5 +1,5 @@
 <template>
-  <body class="bodyLogin">
+  <body class="bodyLogin" style="height:120vh">
     <div class="divLogin">
       <div style="padding:5px;">
         <h3 style="margin-left:-15px">Sign Up</h3>
@@ -51,8 +51,18 @@
         </div>
 
         <div class="row" style="margin-top:10px">
-          <label class="labelLogin">Location</label>
-          <input type="text" v-model="location" class="form-control" placeholder="Location" />
+          <label class="labelLogin">City</label>
+          <input type="text" v-model="city" class="form-control" placeholder="Location" />
+        </div>
+
+        <div class="row" style="margin-top:10px">
+          <label class="labelLogin">State</label>
+          <input type="text" v-model="state" class="form-control" placeholder="Location" />
+        </div>
+
+        <div class="row" style="margin-top:10px">
+          <label class="labelLogin">Address</label>
+          <input type="text" v-model="address" class="form-control" placeholder="Location" />
         </div>
 
         <div class="row" style="margin-top:10px">
@@ -98,11 +108,11 @@ export default {
 
       // Modelos de compañía
       companyName: "",
-      location: "",
       emailCompany: "",
       passwordCompany: "",
       city: "",
       state: "",
+      address: "",
 
       // Tipos de usuario
       usertype: "",
@@ -133,6 +143,7 @@ export default {
         //   console.log('%c⧭', 'color: #00a3cc', response)
         //   this.$router.replace({ path: 'Home'})
         // })
+        
       } else {
         var jsonCompany = {
           name: this.companyName,
@@ -140,9 +151,9 @@ export default {
           email: this.emailCompany,
           password: this.passwordCompany,
           city: this.city,
-          phone: "",
           state: this.state,
           address: this.location,
+          phone: "",
           capacity: "",
           category: ""
         }

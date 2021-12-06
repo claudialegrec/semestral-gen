@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const URL = "http://9a09-2806-2f0-3500-1992-558b-9b4e-dba4-9562.ngrok.io ";//ngrok
-const URL = "http://localhost:3000";
+const URL = "http://2efa-2806-2f0-3500-1992-3964-a29a-54cc-bdc7.ngrok.io/"; //ngrok
+// const URL = "http://localhost:3000";
 
 export default {
     API_POST(route, json, header){

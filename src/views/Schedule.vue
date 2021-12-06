@@ -1,5 +1,6 @@
 <template>
-  <div style="background-color:#111317; padding:30px; height:100vh">
+  <div style="background-color:#111317; padding:30px; height:120vh">
+    <div style="background-color:#111317; height:100%">
     <div class="card d-flex text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
 
       <!-- Header -->
@@ -42,7 +43,7 @@
                       <p style="color:#B5B5B5">27 de Noviembre del 2021</p>
 
                       <!-- Hora -->
-                      <p style="margin-bottom:0px">Hour:</p>
+                      <p style="margin-bottom:0px">Time:</p>
                       <p style="color:#B5B5B5">8:00 PM</p>
                     </div>
                   </div>
@@ -84,12 +85,12 @@
                       <!-- Fecha -->
                       <div style="margin-bottom:10px">
                         <p style="margin-bottom:5px">Fecha:</p>
-                        <input type="text" class="form-control-sm" placeholder="27 de Noviembre del 2021">
+                        <input v-model="date" type="text" class="form-control-sm" placeholder="27 de Noviembre del 2021">
                       </div>
 
                       <!-- Hora -->
                       <p style="margin-bottom:5px">Hora:</p>
-                      <input type="text" class="form-control-sm" placeholder="8:00 PM">
+                      <input v-model="time" type="text" class="form-control-sm" placeholder="8:00 PM">
                     </div>
                   </div>
                 </div>
@@ -97,7 +98,7 @@
                 <!-- Botones de editar y cancelar -->
                 <div class="row" style="margin-bottom:10px; margin-right:10px">
                   <div class="col d-flex justify-content-end">
-                    <a @click="edit = 0" class="btn btn-primary" style="background-color:#3F5AE8">
+                    <a @click="updSchedule()" class="btn btn-primary" style="background-color:#3F5AE8">
                       <i class="fas fa-save" style="margin-right:5px" />
                       Guardar cambios
                     </a>
@@ -116,17 +117,40 @@
 
     </div>
   </div>
+  </div>
 </template>
 
 <script>
+import auth from '../logic/auth' 
+
 export default {
   data() {
     return {
       edit: 0,
+
+      // Modelos de inputs a actualizar
+      date: "",
+      time: "",
+
     }
   },
   methods: {
+    updSchedule() {
 
+      var json = {
+        date: this.date,
+        time: this.time
+      }
+
+      console.log('%c⧭', 'color: #00bf00', "Cambios guardados")
+
+      auth.API_POST('/companies/updateInfo', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        this.edit = 0
+        console.log('%c⧭', 'color: #0066ff', response);
+      })
+      
+    }
   }
 }
 </script>

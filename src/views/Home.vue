@@ -1,6 +1,7 @@
 <template>
-  <div style="background-color:#111317; padding:30px; height:100vh">
-    <div class="card text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
+  <div style="background-color:#111317; padding:30px; height:100%">
+    <div style="background-color:#111317; height:180vh">
+      <div class="card text-white" style="background-color:#181A1E; text-align:left;  border-radius:10px">
 
       <!-- Header -->
       <div class="row" style="padding:30px;">
@@ -14,10 +15,11 @@
           <!-- Card de negocios -->
           <CardService :title="company.name" :rating="company.rating" :text="company.description" :id="company._id"/>
 
+          </div>
         </div>
-      </div>
 
-    </div>
+      </div>
+  </div>
   </div>
 </template>
 
@@ -39,9 +41,6 @@ export default {
       companiesList:[]
     }
   },
-  // created() {
-    
-  // },
   mounted() {
 
     // console.log('%c⧭', 'color: #00e600', this['Users/getUserInfo'])

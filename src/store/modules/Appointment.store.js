@@ -8,7 +8,7 @@ const state = {
       package: "",
       price: "",
       date: "",
-      hour: ""
+      time: ""
     },
   ],
   appointmentsCompany: [
@@ -18,7 +18,7 @@ const state = {
       package: "",
       price: "",
       date: "",
-      hour: ""
+      time: ""
     },
   ]
 };

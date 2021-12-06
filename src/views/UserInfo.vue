@@ -61,30 +61,30 @@
                 <!-- Nombre -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Name:</p>
-                  <input type="text" class="form-control-sm" placeholder="Alfredo">
+                  <input v-model="name" type="text" class="form-control-sm" placeholder="Alfredo">
                 </div>
 
                 <!-- Apellidos -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Last Name:</p>
-                  <input type="text" class="form-control-sm" placeholder="García Yapor">
+                  <input v-model="lastName" type="text" class="form-control-sm" placeholder="García Yapor">
                 </div>
 
                 <!-- Teléfono -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Phone:</p>
-                  <input type="text" class="form-control-sm" placeholder="614 154 9058">
+                  <input v-model="phone" type="text" class="form-control-sm" placeholder="614 154 9058">
                 </div>
 
                 <!-- Teléfono -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">E-mail:</p>
-                  <input type="text" class="form-control-sm" placeholder="alfredogy@outlook.com">
+                  <input v-model="email" type="text" class="form-control-sm" placeholder="alfredogy@outlook.com">
                 </div>
 
                 <!-- Botón de Guardar Cambios -->
                 <div class="d-flex justify-content-end" style="margin-top:30px">
-                  <a @click="edit = 0" class="btn btn-primary" style="background-color:#3F5AE8">
+                  <a @click="updInfoUser()" class="btn btn-primary" style="background-color:#3F5AE8">
                     <i class="fas fa-save" style="margin-right:5px" />
                     Save
                   </a>
@@ -100,14 +100,38 @@
 </template>
 
 <script>
+import auth from '../logic/auth' 
+
 export default {
   data() {
     return {
       edit: 0,
+
+      // Modelos de inputs
+      name: "",
+      lastName: "",
+      phone: "",
+      email: "",
+
     }
   },
   methods: {
+    updInfoUser() {
+      
+      var json = {
+        name: this.name,
+        lastName: this.lastName,
+        phone: this.phone,
+        email: this.email
+      }
 
+      auth.API_POST('/users/updateInfo', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        this.edit = 0
+        console.log('%c⧭', 'color: #0066ff', response);
+      })
+      
+    }
   }
 }
 </script>
