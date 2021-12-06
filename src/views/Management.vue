@@ -12,22 +12,68 @@
           </div>
       
           <div class="row" style="padding:30px; margin-top:-30px">
-            <div class="col-sm-4 mb-3">
-              <p><b> User: </b></p>
-              <p>Rosa Melano</p>
-            </div>
 
-            <div class="col">
-              <div class="d-flex justify-content-end">
-                <a href="#" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
-                  <i class="fas fa-trash-alt" style="margin-right:5px" />
-                  Delete User
-                </a>
-              </div>
-            </div>
+            <h5>Users accounts</h5>
+
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Erick</td>
+                  <td>Silva</td>
+                  <td>nintendo@email.com</td>
+                  <td>614 154 9058</td>
+                  <td>
+                    <a href="#" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
+                      <i class="fas fa-trash-alt" style="margin-right:5px" />
+                      Delete User
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h5>Companies accounts</h5>
+
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Company Name</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">City</th>
+                  <th scope="col">Address</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Luigi's Mansion</td>
+                  <td>614 123 4567</td>
+                  <td>luigis@correo.com</td>
+                  <td>Chihuahua</td>
+                  <td>Luigis Street</td>
+                  <td>
+                    <a href="#" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
+                      <i class="fas fa-trash-alt" style="margin-right:5px" />
+                      Delete User
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
-
         </div>
       </div>
     </div>
@@ -68,5 +114,13 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+th, td {
+  text-align: center;
+}
+
+h5 {
+  margin-bottom: 20px;
 }
 </style>
