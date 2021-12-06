@@ -51,18 +51,23 @@ export default {
   mounted() {
 
     // console.log('%c⧭', 'color: #00e600', this['Users/getUserInfo'])
-    
+    this.loadCompaniesList();
     console.log('%c⧭', 'color: #00a3cc', this['Company/getCompanyInfo'])
     // this['Company/fetchCompaniesList']
     // this['Company/getCompaniesList']
-    this['Company/fetchCompaniesList']().then(() => {
-      this.companiesList = this['Company/getCompaniesList']
-      console.log('%c⧭', 'color: #00bf00', this['Company/getCompaniesList'])
-      console.log('%c⧭', 'color: #733d00', this.companiesList)
-    })
+    // this['Company/fetchCompaniesList']().then(() => {
+    //   this.companiesList = this['Company/getCompaniesList']
+    //   console.log('%c⧭', 'color: #00bf00', this['Company/getCompaniesList'])
+    //   console.log('%c⧭', 'color: #733d00', this.companiesList)
+    // })
   },
   methods: {
-    ...mapActions(['Company/fetchCompaniesList'])
+    ...mapActions(['Company/fetchCompaniesList']),
+    loadCompaniesList(){
+      this['Company/fetchCompaniesList']()
+      console.log('%c⧭', 'color: #00bf00', this['Company/getCompaniesList'])
+      // console.log('%c⧭', 'color: #bfffc8', this['Company/fetchCompaniesList'])
+    }
   },
 }
 </script>

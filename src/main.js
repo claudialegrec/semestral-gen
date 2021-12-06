@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import BootstrapVue3 from 'bootstrap-vue-3'
 // import { createStore } from 'vuex'
 
 // import Appointment from '@/store/modules/Appointment.store';
@@ -38,5 +39,6 @@ import '@fortawesome/fontawesome-free/js/all'
 const app = createApp(App).use(router)
 
 app.use(store)
+app.use(BootstrapVue3)
 
 app.mount('#app')

@@ -86,13 +86,13 @@
                       <div class="col" style="margin-bottom:10px">
                         <!-- Fecha -->
                         <div style="margin-bottom:10px">
-                          <p style="margin-bottom:5px">Fecha:</p>
-                          <input v-model="date" type="text" class="form-control-sm" placeholder="27 de Noviembre del 2021">
+                          <p style="margin-bottom:5px">Date:</p>
+                          <input v-model="date" type="text" class="form-control-sm" placeholder="YYYY-MM-DD">
                         </div>
 
                         <!-- Hora -->
-                        <p style="margin-bottom:5px">Hora:</p>
-                        <input v-model="time" type="text" class="form-control-sm" placeholder="8:00 PM">
+                        <p style="margin-bottom:5px">Hour:</p>
+                        <input v-model="time" type="text" class="form-control-sm" placeholder="HH:MM (formato de 24hrs)">
                       </div>
                     </div>
                   </div>

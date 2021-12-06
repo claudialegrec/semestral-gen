@@ -48,6 +48,8 @@
                 <p style="margin-bottom:0px">Email:</p>
                 <p style="color:#B5B5B5">{{userInfo.email}}</p>
 
+              </div>
+              <div class="col">
                 <!-- Direccion -->
                 <p style="margin-bottom:0px">Address:</p>
                 <p style="color:#B5B5B5">{{userInfo.address}}</p>
@@ -92,6 +94,10 @@
                   <input v-model="email" type="text" class="form-control-sm" placeholder="E-mail">
                 </div>
 
+                
+
+              </div>
+              <div class="col">
                 <!-- Address -->
                 <div style="margin-bottom:10px">
                   <p style="margin-bottom:5px">Address:</p>
@@ -117,7 +123,6 @@
                     Save
                   </a>
                 </div>
-
               </div>
             </div>
           </div>
