@@ -3,20 +3,20 @@
     <h5 style="margin-bottom:20px">Packages list</h5>
     <!-- Nombre del paquete -->
     <div style="margin-bottom:10px">
-      <input v-model="packageTitle" type="text" class="form-control-sm" placeholder="Package 1">
+      <input v-model="packageInfo.packageTitle" type="text" class="form-control-sm" placeholder="Package 1">
     </div>
 
     <!-- Descripción del paquete -->
     <div style="margin-bottom:10px">
-      <input v-model="packageDescription" type="text" class="form-control-sm" placeholder="Dinner, music, services and decoration.">
+      <input v-model="packageInfo.packageDescription" type="text" class="form-control-sm" placeholder="Dinner, music, services and decoration.">
     </div>
 
     <!-- Precio del paquete -->
     <div style="margin-bottom:10px">
-      <input v-model="packagePrice" type="text" class="form-control-sm" placeholder="$500,000 MXN">
+      <input v-model="packageInfo.packagePrice" type="text" class="form-control-sm" placeholder="$500,000 MXN">
     </div>
 
-    <hr>
+    
 
     <div class="row">
       <div class="d-inline-flex p-2 justify-content-end">
@@ -31,6 +31,7 @@
         </button>
       </div>
     </div>
+    <hr>
   </div>
 </template>
 
@@ -39,12 +40,19 @@ import auth from '../logic/auth'
 
 export default{
   name: 'addPackage',
+  props:{
+    packageTitle: String,
+    packageDescription: String,
+    packagePrice: String
+  },
   data() {
     return {
-      // Modelos de paquetes
-      packageTitle: "",
-      packageDescription: "",
-      packagePrice: "",
+      // Modelos de paquetes'
+      packageInfo:{
+        packageTitle: "",
+        packageDescription: "",
+        packagePrice: ""
+      }
     }
   },
   methods: {
@@ -76,6 +84,11 @@ export default{
       })
 
     }
-  }
+  },
+  mounted() {
+    this.packageInfo.packageTitle = this.$props.packageTitle
+    this.packageInfo.packageDescription = this.$props.packageDescription
+    this.packageInfo.packagePrice = this.$props.packagePrice
+  },  
 }
 </script>
