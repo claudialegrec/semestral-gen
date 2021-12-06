@@ -33,7 +33,7 @@
                   <td>nintendo@email.com</td>
                   <td>614 154 9058</td>
                   <td>
-                    <a href="#" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
+                    <a @click="deleteUser()" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
                       <i class="fas fa-trash-alt" style="margin-right:5px" />
                       Delete User
                     </a>
@@ -64,7 +64,7 @@
                   <td>Chihuahua</td>
                   <td>Luigis Street</td>
                   <td>
-                    <a href="#" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
+                    <a @click="deleteUser()" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
                       <i class="fas fa-trash-alt" style="margin-right:5px" />
                       Delete User
                     </a>
@@ -91,6 +91,13 @@ export default {
   setup() {
     return { sidebarWidth }
   },
+  data() {
+    return {
+      deleteUser() {
+        console.log('%c⧭', 'color: #ff0000', "borrado")
+      }
+    }
+  }
 }
 </script>
 
