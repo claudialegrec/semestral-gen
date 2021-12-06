@@ -13,7 +13,7 @@
         <div v-if="edit == 0" class="ml-auto p-2">
           <a @click="edit = 1" class="btn btn-primary" style="background-color:#3F5AE8">
             <i class="fas fa-pen" style="margin-right:5px" />
-            Editar
+            Edit
           </a>
         </div>
 
