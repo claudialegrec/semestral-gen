@@ -44,10 +44,10 @@
               </div>
             </div>
             <hr>
+            <h5 style="margin-bottom:20px">Packages</h5>
             <div class="row mt-3" style="padding:30px; margin-top:-30px" v-for="(pack, key) in packageList" :key="key">
               <div class="col">
 
-                <h5 style="margin-bottom:20px">Packages</h5>
                 <p style="margin-bottom:0px">{{pack.name}}</p>
                 <p style="color:#B5B5B5">{{pack.description}}</p>
                 <p style="color:#B5B5B5">{{pack.cost}}</p>

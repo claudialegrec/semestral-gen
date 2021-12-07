@@ -1,19 +1,20 @@
 <template>
   <div class="col">
+    <!-- {{packageInfo}} -->
     <h5 style="margin-bottom:20px">Packages list</h5>
     <!-- Nombre del paquete -->
     <div style="margin-bottom:10px">
-      <input v-model="packageInfo.packageTitle" type="text" class="form-control-sm" placeholder="Package 1">
+      <input v-model="packageInfo.name" type="text" class="form-control-sm" placeholder="Package 1">
     </div>
 
     <!-- Descripción del paquete -->
     <div style="margin-bottom:10px">
-      <input v-model="packageInfo.packageDescription" type="text" class="form-control-sm" placeholder="Dinner, music, services and decoration.">
+      <input v-model="packageInfo.description" type="text" class="form-control-sm" placeholder="Dinner, music, services and decoration.">
     </div>
 
     <!-- Precio del paquete -->
     <div style="margin-bottom:10px">
-      <input v-model="packageInfo.packagePrice" type="text" class="form-control-sm" placeholder="$500,000 MXN">
+      <input v-model="packageInfo.cost" type="text" class="form-control-sm" placeholder="$500,000 MXN">
     </div>
 
     
@@ -63,10 +64,10 @@ export default{
     updatePackage() {
             
       var json = {
-        packId: this.packageTitle,
-        name: this.packageTitle,
-        description: this.packageDescription,
-        cost: this.packagePrice,
+        packId: this.$props.id,
+        name: this.packageInfo.name,
+        description: this.packageInfo.description,
+        cost: this.packageInfo.cost,
         companyId: this.$props.companyId
       }
 
@@ -79,7 +80,7 @@ export default{
     deletePackage() {
                   
       var json = {
-        packageId: this.$props.id,
+        packId: this.$props.id,
         companyId: this.$props.companyId
       }
 

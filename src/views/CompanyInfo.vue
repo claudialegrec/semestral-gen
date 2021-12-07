@@ -18,7 +18,7 @@
         </div>
 
         <div v-if="edit == 1" class="ml-auto p-2">
-          <a @click="edit = 0" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
+          <a @click="resetInfo()" class="btn btn-danger" style="background-color:#E83F3F; margin-left:20px">
             <i class="fas fa-times" style="margin-right:5px" />
             Stop editing
           </a>
@@ -29,7 +29,7 @@
       <div v-if="edit == 0" class="row" style="padding:30px; margin-top:-30px">
         <div class="col">
           <div style="padding:10px">
-            {{packageList}}
+            <!-- {{packageList}} -->
             <!-- Datos de usuario -->
             <div class="row">
               <div class="col-4">
@@ -78,7 +78,7 @@
                 <h5 style="margin-bottom:20px">Packages list</h5>
                 <div class="row" v-for="(pack, key) in packageList" :key="key">
                   <div class="col">
-                    {{pack}}
+                    <!-- {{pack}} -->
                     <!-- Paquetes -->
                     <p style="margin-bottom:0px">{{pack.name}}:</p>
                     <p style="color:#B5B5B5">{{pack.description}}</p>
@@ -256,19 +256,21 @@ export default {
   },
   methods: {
     ...mapMutations(['Company/updateCompany']),
+    resetInfo(){
+      this.getCompanyInfo()
+      this.edit = 0;
+    },
     createPackage(){
       var json = {
         name:"",
         description:"",
         cost:"",
-        companyId:""
+        companyId:this['Company/getCompanyInfo']._id
       }
 
+      console.log('%c⧭', 'color: #ffffff', json)
       auth('/packs/newPackage', json, {'Content-Type': 'application/json'})
-      .then((response) => {
-        console.log('%c⧭', 'color: #33cc99', response);
-        // this.packageList.push(response)
-      })
+      this.loadPackages()
     },
     loadPackages(){
       let json = {companyId: this.companyId}
@@ -297,28 +299,30 @@ export default {
         name: this.companyName,
         description: this.description,
         email: this.email,
-        password: this.response.password,
+        password: this.companyInfo.password,
         phone: this.phone,
         city: this.city,
         state: this.state,
         capacity: this.capacity,
         address: this.address,
-        rating: this.response.rating,
+        rating: this.companyInfo.rating,
         category: this.category,
       }
 
       console.log('%c⧭', 'color: #0088cc', json)
 
-      this['Company/updateCompany'](json).then(() => {
-        this.edit = 0;
-      })
+      // auth.()
 
-      // auth.API_POST('companies/updateInfo', json, {'Content-Type': 'application/json'})
-      // .then((response) => {
-      //   this.getCompanyInfo()
-      //   console.log('%c⧭', 'color: #ff0000', response)
+      // this['Company/updateCompany'](json).then(() => {
       //   this.edit = 0;
       // })
+
+      auth.API_POST('/companies/updateInfo', json, {'Content-Type': 'application/json'})
+      .then((response) => {
+        this.getCompanyInfo()
+        console.log('%c⧭', 'color: #ff0000', response)
+        this.edit = 0;
+      })
     },
     getCompanyInfo() {
 

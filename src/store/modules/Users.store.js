@@ -49,6 +49,8 @@ const actions = {
   },
 
   async updateUser({commit}, newUser){
+
+    console.log('%c⧭', 'color: #ffa280', newUser);
     auth.API_POST('/users/updateInfo', newUser, {'Content-Type': 'application/json'})
     .then((response) => {
       commit('updUser', response.data.data);
