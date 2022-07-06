@@ -48,7 +48,7 @@
 import {mapActions, mapGetters, mapMutations} from "vuex"
 
 export default {
-  name: 'LogIn',
+  // name: 'LogIn',
   data() {
     return {
       user: "",
